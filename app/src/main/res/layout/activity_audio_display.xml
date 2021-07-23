@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".activity.AudioDisplayActivity">
+<TextView
+    android:id="@+id/txtSelectln"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp"
+    android:padding="10dp"
+    android:text="Select the Audio Edition you wish to Listen to"
+    android:textSize="20sp"
+    android:textColor="@color/black"
+    android:textAlignment="center"
+    android:textStyle="bold" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_below="@id/txtSelectln"
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycleLang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" />
+
+
+<RelativeLayout
+    android:id="@+id/progressLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

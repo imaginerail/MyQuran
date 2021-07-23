@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llContent"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_weight="5"
+    android:background="#F8ABA5"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal">
+
+    <TextView
+            android:id="@+id/txtedname"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:gravity="center"
+            android:text="SURAH NAME"
+            android:textColor="#0C0C0C"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txedengname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:layout_below="@+id/txtedname"
+            android:text="(Meccan) Total Ayats:111"
+            android:textColor="#F11C0D"
+            android:textSize="18sp"
+            />
+
+
+
+</RelativeLayout>

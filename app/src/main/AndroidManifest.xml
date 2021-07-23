@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.aneeq.myquran">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/alquran"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/alquran"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
+        <activity android:name=".activity.AudioDisplayActivity"></activity>
+        <activity android:name=".activity.SrchByTxtActivity" />
+        <activity android:name=".activity.SrchByRefNumActivity" />
+        <activity android:name=".activity.NavigActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.ReciteJuzActivity" />
+        <activity android:name=".activity.TypeNEditionActivity" />
+        <activity android:name=".activity.LanguagesActivity" />
+        <activity android:name=".activity.ReciteSurahActivity" />
+        <activity android:name=".activity.QuranMainActivity" />
+        <activity android:name=".activity.StartReadingActivity" />
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainActivity" />
+    </application>
+
+</manifest>

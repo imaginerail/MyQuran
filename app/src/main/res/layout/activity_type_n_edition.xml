@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.TypeNEditionActivity">
+
+    <TextView
+        android:id="@+id/txtSelectType"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:text="Select Type of Al Quran"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/lcContent"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/txtSelectType"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:background="@drawable/custom_grid_layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/txtNotice"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="25dp"
+            android:text="We do not guarantee the authenticity of the provided Quran editions here.All Editions are taken from http://api.alquran.cloud.Please verify first." />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtSelectEd"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/lcContent"
+        android:layout_marginLeft="15dp"
+        android:text="Select Edition of Al Quran"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleTNE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSelectEd"
+        android:layout_marginTop="15dp"
+        android:padding="10dp" />
+
+
+    <RelativeLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtSelectEd"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtNotAvail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSelectEd"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="125dp"
+        android:text="Not Available in this Language,Please Select a different format or different Language"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">MyQuran</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Identifier"><b>Identifier</b></string>
+    <string name="Language"><b>Language</b></string>
+    <string name="Name"><b>Name</b></string>
+    <string name="EnglishName"><b>EnglishName</b></string>
+    <string name="Format"><b>Format</b></string>
+    <string name="Type"><b>Type</b></string>
+    <string-array name="type">
+        <item>translation</item>
+        <item>tafsir</item>
+        <item>transliteration</item>
+        <item>versebyverse</item>
+    </string-array>
+
+    <string-array name="language">
+        <item>Arabic</item>
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Persian</item>
+        <item>Indonesian</item>
+        <item>Japanese</item>
+        <item>Polish</item>
+        <item>Russian</item>
+        <item>Turkish</item>
+        <item>Urdu</item>
+    </string-array>
+
+    <string-array name="format">
+        <item>text</item>
+        <item>audio</item>
+    </string-array>
+</resources>

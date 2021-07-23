@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="7">
+
+        <TextView
+            android:id="@+id/txtTrans"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="5"
+            android:padding="1dp"
+            android:text="Translation"
+            android:textColor="@color/colorAccent"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/tgb"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:backgroundTint="#FF5722"
+            android:checked="true"
+            android:gravity="center"
+            android:padding="2dp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtYSTI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llContent"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:text="Your Selected Translation is:"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtActualTrans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtYSTI"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btnChangeEdition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtActualTrans"
+        android:backgroundTint="#EC677F"
+        android:text="CHANGE EDITION"
+        android:textSize="25sp" />
+
+</RelativeLayout>

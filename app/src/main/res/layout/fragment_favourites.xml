@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FavouritesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txturfav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:text="Your Favourite Juz and Surah:"
+            android:textSize="38sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleFavList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp" />
+    </LinearLayout>
+
+    <com.trendyol.bubblescrollbarlib.BubbleScrollBar
+        android:id="@+id/bubbleScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:bubbleBackground="@drawable/fast_scroll_thumb"
+        app:bubbleElevation="6dp"
+        app:bubbleHeight="50dp"
+        app:bubbleMargin="4dp"
+        app:bubbleMinWidth="50dp"
+        app:bubblePadding="4dp"
+        app:bubbleTextColor="#FFFFFF"
+        app:bubbleTextSize="8sp"
+        app:scrollbarBackground="@color/scrollBg"
+        app:thumbBackground="@color/black" />
+
+        <RelativeLayout
+            android:id="@+id/noLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+
+            <ImageView
+                android:id="@+id/imgEmptyFavourites"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/ic_staryellow"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/txtempty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You don't have any Favourites yet"
+                android:layout_below="@+id/imgEmptyFavourites"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+</FrameLayout>
