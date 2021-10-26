@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.search
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.models.SearchAyahResults
-
-import kotlin.collections.ArrayList
 
 class SearchAyahResultsAdapter(val context: Context, var sarList: ArrayList<SearchAyahResults>) :
     RecyclerView.Adapter<SearchAyahResultsAdapter.SLViewHolder>() {

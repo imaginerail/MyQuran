@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.browse
 
 import android.content.Context
 import android.content.Intent
@@ -9,9 +9,10 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.ReciteJuzActivity
+import com.aneeq.myquran.adapter.DBAsyncTask
+import com.aneeq.myquran.adapter.GetAllFavAsyncTask
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.models.JuzList
-import com.aneeq.myquran.models.SurahList
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -101,7 +102,7 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
                     val filteredList=ArrayList<JuzList>()
 
                     for (row in jlList) {
-                        if (row.name.toLowerCase(Locale.getDefault())
+                        if (row.name.lowercase(Locale.getDefault())
                                 .contains(charString) || row.number.toString()
                                 .contains(charString)
                         ) {

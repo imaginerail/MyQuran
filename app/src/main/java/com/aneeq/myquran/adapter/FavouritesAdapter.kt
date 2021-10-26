@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.ReciteJuzActivity
-import com.aneeq.myquran.activity.ReciteSurahActivity
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.fragment.FavouritesFragment
 

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.ReciteJuzActivity
-import com.aneeq.myquran.activity.ReciteSurahActivity
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesDatabase
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.models.SurahList
@@ -56,6 +55,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
             val intent = Intent(context, ReciteJuzActivity::class.java)
             intent.putExtra("page", sq.page)
             intent.putExtra("isSurah", true)
+            intent.putExtra("pos", sq.number)
             context.startActivity(intent)
         })
 
@@ -100,14 +100,14 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
-                val charString = p0.toString().toLowerCase(Locale.getDefault())
+                val charString = p0.toString().lowercase(Locale.getDefault())
                 if (charString.isEmpty()) {
                     searchFilterList = slList
                 } else {
                     val filteredList = ArrayList<SurahList>()
 
                     for (row in slList) {
-                        if (row.englishName.toLowerCase(Locale.getDefault())
+                        if (row.englishName.lowercase(Locale.getDefault())
                                 .contains(charString)
                         ) {
                             filteredList.add(row)

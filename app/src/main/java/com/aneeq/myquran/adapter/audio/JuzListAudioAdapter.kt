@@ -1,18 +1,17 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.audio
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
-import com.aneeq.myquran.activity.ReciteJuzActivity
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
+import com.aneeq.myquran.activity.ReciteAudioActivity
 import com.aneeq.myquran.models.JuzList
-import java.util.*
-import kotlin.collections.ArrayList
 
 class JuzListAudioAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
     RecyclerView.Adapter<JuzListAudioAdapter.JLViewHolder>() {
@@ -41,16 +40,18 @@ class JuzListAudioAdapter(val context: Context, var jlList: ArrayList<JuzList>) 
 
     override fun onBindViewHolder(holder: JLViewHolder, position: Int) {
         val jq = jlList[position]
-        holder.txtnumber.text = "${position+1}."
+        holder.txtnumber.text = "${position + 1}."
         holder.txtjuzname.text = jq.name
-//        holder.llContent.setOnClickListener(View.OnClickListener {
-//            val intent = Intent(context, ReciteJuzActivity::class.java)
-//            intent.putExtra("jan",jq.number)
-//            context.startActivity(intent)
-//        })
+        holder.btnAddFav.visibility = View.GONE
+        holder.llContent.setOnClickListener(View.OnClickListener {
+            val intent = Intent(context, ReciteAudioActivity::class.java)
+            intent.putExtra("num", jq.number)
+            intent.putExtra("isSurah", false)
+            context.startActivity(intent)
+        })
 
 
-        }
+    }
 
 
 

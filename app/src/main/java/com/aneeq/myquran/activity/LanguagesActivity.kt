@@ -1,17 +1,16 @@
 package com.aneeq.myquran.activity
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +19,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
-import com.aneeq.myquran.adapter.LanguageAdapter
-import com.aneeq.myquran.adapter.SQRecyclerAdapter
-import com.aneeq.myquran.adapter.SurahListAdapter
+import com.aneeq.myquran.adapter.settings.LanguageAdapter
 import com.aneeq.myquran.models.Languages
-import com.aneeq.myquran.models.SelectQuran
-import com.aneeq.myquran.models.SurahList
 import com.aneeq.myquran.util.ConnectionManager
 import org.json.JSONException
 

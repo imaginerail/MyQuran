@@ -1,22 +1,18 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.settings
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.TypeNEditionActivity
 import com.aneeq.myquran.models.Languages
-import com.aneeq.myquran.models.SurahList
 import java.util.*
-import kotlin.collections.ArrayList
 
 class LanguageAdapter(val context: Context, var lnList: ArrayList<Languages>) :
     RecyclerView.Adapter<LanguageAdapter.SLViewHolder>() {
@@ -41,17 +37,18 @@ class LanguageAdapter(val context: Context, var lnList: ArrayList<Languages>) :
         sharedPreferences =
             context.getSharedPreferences("Messenger Preferences", Context.MODE_PRIVATE)
         val sq = lnList[position]
-        val loc=Locale(sq.language)
+        val loc = Locale(sq.language)
         holder.txtLanguage.text = loc.displayLanguage
-        holder.txtLanguage.text=holder.txtLanguage.text.substring(0,1).toUpperCase()+holder.txtLanguage.text.substring(1)
+        holder.txtLanguage.text =
+            holder.txtLanguage.text.substring(0, 1)
+                .uppercase(Locale.getDefault()) + holder.txtLanguage.text.substring(1)
 
         holder.llContent.setOnClickListener(View.OnClickListener {
 
 
-
             val intent = Intent(context, TypeNEditionActivity::class.java)
-            intent.putExtra("selectLang",sq.language)
-              context.startActivity(intent)
+            intent.putExtra("selectLang", sq.language)
+            context.startActivity(intent)
 
 
         })

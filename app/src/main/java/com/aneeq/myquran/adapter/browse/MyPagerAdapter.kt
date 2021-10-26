@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.browse
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,13 +1,11 @@
 package com.aneeq.myquran.activity
 
 
-
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import com.aneeq.myquran.R
@@ -61,11 +59,11 @@ class NavigActivity : AppCompatActivity() {
                 }
                 R.id.audio -> {
 
-                        supportFragmentManager.beginTransaction()
-                            .replace(
-                                R.id.frame,
-                                AudioFragment()
-                            ).commit()
+                    supportFragmentManager.beginTransaction()
+                        .replace(
+                            R.id.frame,
+                            AudioFragment()
+                        ).commit()
 
 
                 }

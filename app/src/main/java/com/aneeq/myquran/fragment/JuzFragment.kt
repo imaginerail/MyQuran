@@ -2,7 +2,6 @@ package com.aneeq.myquran.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,13 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
-import com.aneeq.myquran.adapter.JuzListAdapter
-import com.aneeq.myquran.adapter.SurahListAdapter
+import com.aneeq.myquran.adapter.browse.JuzListAdapter
 import com.aneeq.myquran.models.JuzList
-import com.aneeq.myquran.models.SurahList
 
 class JuzFragment : Fragment() {
     lateinit var searchEditText: EditText

@@ -12,8 +12,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.aneeq.myquran.R
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesDatabase
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.database.seleddatabase.SelDatabase
 import com.aneeq.myquran.database.seleddatabase.SelEntity
 import com.aneeq.myquran.models.Editions

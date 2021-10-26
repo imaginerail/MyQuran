@@ -1,20 +1,16 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.search
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
-import com.aneeq.myquran.activity.ReciteJuzActivity
-import com.aneeq.myquran.activity.ReciteSurahActivity
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
+import com.aneeq.myquran.adapter.DBAsyncTask3
 import com.aneeq.myquran.database.seleddatabase.SelEntity
-import com.aneeq.myquran.fragment.FavouritesFragment
 
 class ShowSelectedEditionAdapter(val context: Context, var sList: ArrayList<SelEntity>) :
     RecyclerView.Adapter<ShowSelectedEditionAdapter.SLViewHolder>() {

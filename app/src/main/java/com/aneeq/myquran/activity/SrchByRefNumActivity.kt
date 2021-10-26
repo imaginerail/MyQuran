@@ -4,13 +4,13 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -21,14 +21,12 @@ import androidx.room.Room
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-
 import com.aneeq.myquran.R
-import com.aneeq.myquran.adapter.*
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesDatabase
-import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
+import com.aneeq.myquran.adapter.SelectMultEditionAdapter
+import com.aneeq.myquran.adapter.search.SearchAyahResultsAdapter
+import com.aneeq.myquran.adapter.search.ShowSelectedEditionAdapter
 import com.aneeq.myquran.database.seleddatabase.SelDatabase
 import com.aneeq.myquran.database.seleddatabase.SelEntity
-import com.aneeq.myquran.fragment.RetrieveFavourites
 import com.aneeq.myquran.models.Editions
 import com.aneeq.myquran.models.SearchAyahResults
 import com.aneeq.myquran.util.ConnectionManager

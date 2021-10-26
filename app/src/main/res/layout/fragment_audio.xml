@@ -23,29 +23,11 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleSurahList"
+            android:id="@+id/recycleaudioSurahList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="10dp" />
 
-        <TextView
-            android:id="@+id/txtSelectJuz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:background="#576FF3"
-            android:text="Select Juz for audio"
-            android:textAlignment="center"
-            android:textSize="35sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleJuzList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:padding="10dp" />
     </LinearLayout>
 </FrameLayout>

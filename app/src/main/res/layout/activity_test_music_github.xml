@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TestMusicGithubActivity">
+
+    <com.example.jean.jcplayer.view.JcPlayerView
+        android:id="@+id/jcplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp" />
+    <!--        app:next_icon=""-->
+    <!--        app:next_icon_color=""-->
+    <!--        app:pause_icon=""-->
+    <!--        app:pause_icon_color=""-->
+    <!--        app:play_icon=""-->
+    <!--        app:play_icon_color=""-->
+    <!--        app:previous_icon=""-->
+    <!--        app:previous_icon_color=""-->
+    <!--        app:progress_color=""-->
+    <!--        app:random_icon_color=""-->
+    <!--        app:repeat_icon=""-->
+    <!--        app:repeat_icon_color=""-->
+    <!--        app:seek_bar_color=""-->
+    <!--        app:text_audio_current_duration_color=""-->
+    <!--        app:text_audio_duration_color=""-->
+    <!--        app:text_audio_title_color=""-->
+
+    <com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
+        android:id="@+id/argmusicplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp" />
+
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/psvLang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#D657EC"
+        android:gravity="center"
+        android:hint="Select Language"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        android:textSize="14.5sp"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_divider_color="@color/colorPrimaryDark"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="@color/white"
+        app:spinner_popup_elevation="14dp" />
+
+</LinearLayout>

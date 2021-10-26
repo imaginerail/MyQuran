@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.browse
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -18,13 +18,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
-import com.aneeq.myquran.adapter.ReciteJuzAdapter
+import com.aneeq.myquran.adapter.browse.ReciteJuzAdapter
 import com.aneeq.myquran.models.*
 import com.aneeq.myquran.util.ConnectionManager
-import me.thanel.swipeactionview.SwipeActionView
-import me.thanel.swipeactionview.SwipeGestureListener
 import org.json.JSONException
-import java.lang.Math.abs
 
 class ReciteJuzActivity : AppCompatActivity() {
     lateinit var rlsupreme: RelativeLayout
@@ -45,6 +42,7 @@ class ReciteJuzActivity : AppCompatActivity() {
     var jpsList = arrayListOf<String>()
     var url2 = ""
     var c = 1
+    var pos = 1
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,7 +171,7 @@ class ReciteJuzActivity : AppCompatActivity() {
 
         val queue = Volley.newRequestQueue(this)
 
-        val url1 = "http://api.alquran.cloud/v1/page/$c/quran-uthmani"
+        val url1 = "http://api.alquran.cloud/v1/page/$c/quran-simple"
 
 
         url2 = if (sharedPreferences.getBoolean("transstate", true)) {
@@ -217,6 +215,15 @@ class ReciteJuzActivity : AppCompatActivity() {
                                 val surah = jsonObject.getJSONObject("surah")
                                 jpsList.add(surah.getString("name"))
 
+                                if (jsonObject.getJSONObject("surah")
+                                        .getInt("number") == intent.getIntExtra(
+                                        "pos",
+                                        114
+                                    ) && jsonObject.getInt("numberInSurah") == 1
+                                ) {
+                                    pos = (i * 2)
+                                }
+
                             }
                             displaySurahOnthisPage(jpsList)
                             val sortedList = oList.sortedWith(compareBy { it.key })
@@ -235,7 +242,10 @@ class ReciteJuzActivity : AppCompatActivity() {
                             recycleRecite.adapter = recitejuzAdapter
                             recycleRecite.setHasFixedSize(true)
 
-
+                            (recycleRecite.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                                pos,
+                                0
+                            )
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }

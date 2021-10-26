@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable-anydpi/ic_arrow.xml" value="0.2" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/custom_grid_layout.xml" value="0.1" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundagain.xml" value="0.19166666666666668" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedets.xml" value="0.19166666666666668" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedetsmirror.xml" value="0.19166666666666668" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedll.xml" value="0.240625" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_audio_display.xml" value="0.10916919959473151" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_music_test.xml" value="0.22" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_recite_audio.xml" value="0.22" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_recite_juz.xml" value="0.10916919959473151" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_recite_surah.xml" value="0.12454710144927536" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_settings.xml" value="0.10916919959473151" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_splash.xml" value="0.16032608695652173" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_ref_num.xml" value="0.1322463768115942" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_txt.xml" value="0.22" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_start_reading.xml" value="0.18885869565217392" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_test_music.xml" value="0.18432971014492755" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_test_music_github.xml" value="0.25" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_type_n_edition.xml" value="0.129981884057971" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/audio_display_recyclerview_single_row.xml" value="0.25" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_audio.xml" value="0.16032608695652173" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_juz.xml" value="0.129981884057971" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/jlist_recycler_single_row.xml" value="0.10916919959473151" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_surah_audio_single_row.xml" value="0.25" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_translate_single_row.xml" value="0.13858695652173914" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/recite_recycler_single_row.xml" value="0.14764492753623187" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/search_text_results_recycler_single_row.xml" value="0.22" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/slist_recycler_single_row.xml" value="0.14764492753623187" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/sq_recycler_single_row.xml" value="0.14764492753623187" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

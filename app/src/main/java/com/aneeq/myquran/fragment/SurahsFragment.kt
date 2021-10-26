@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -73,7 +73,7 @@ class SurahsFragment : Fragment() {
         ///////////////////////////////////
         search.queryHint = "Type the name/number of Surah here"
         searchEditText = view.findViewById(androidx.appcompat.R.id.search_src_text)
-        searchEditText.setTextColor(ContextCompat.getColor(context!!, R.color.colorAccent))
+        searchEditText.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

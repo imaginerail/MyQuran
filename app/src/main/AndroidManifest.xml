@@ -14,17 +14,30 @@
         android:roundIcon="@drawable/alquran"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name=".activity.AudioDisplayActivity"></activity>
-        <activity android:name=".activity.SrchByTxtActivity" />
+        <activity
+            android:name=".TestMusicGithubActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TestMusicActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ReciteAudioActivity"
+            android:exported="true" />
+        <activity android:name=".activity.AudioDisplayActivity" />
+        <activity
+            android:name=".activity.SrchByTxtActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.SrchByRefNumActivity" />
-        <activity android:name=".activity.NavigActivity" />
+        <activity
+            android:name=".activity.NavigActivity"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.ReciteJuzActivity" />
         <activity android:name=".activity.TypeNEditionActivity" />
         <activity android:name=".activity.LanguagesActivity" />
-        <activity android:name=".activity.ReciteSurahActivity" />
-        <activity android:name=".activity.QuranMainActivity" />
         <activity android:name=".activity.StartReadingActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

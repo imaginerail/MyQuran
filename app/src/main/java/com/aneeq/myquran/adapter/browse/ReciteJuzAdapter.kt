@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.browse
 
 import android.content.Context
 import android.graphics.Color
@@ -24,7 +24,7 @@ class ReciteJuzAdapter(
         val ll1: LinearLayout = view.findViewById(R.id.ll1)
         fun setOriginal(org: OriginalJuz) {
             txtquran.text = "${org.surahNum}:${org.ayahNum} ${org.text} \u06DD"
-            if (org.text.contains("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ")) { //D18973
+            if (org.ayahNum == 1) { //D18973
                 ll1.setBackgroundColor(Color.parseColor("#F43E07"))
             }
         }
@@ -64,9 +64,7 @@ class ReciteJuzAdapter(
 
         if (getItemViewType(position) == 0) {
             (holder as ORViewHolder).setOriginal(original)
-//            if(original.text.contains("\uFEFFبِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ") && isSurah){
-//                rv.scrollToPosition(position)
-//            }
+//
         } else {
             (holder as DPViewHolder).setDuplicate(original)
 

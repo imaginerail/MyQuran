@@ -1,9 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.SrchByTxtActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/txtlang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="Select Language:"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/psvogLang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#650FFD"
+                    android:gravity="center"
+                    android:hint="Select Language"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textSize="14.5sp"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="8dp"
+                    app:spinner_divider_color="@color/colorPrimaryDark"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="0.4dp"
+                    app:spinner_popup_animation="dropdown"
+                    app:spinner_popup_background="#C4AEEC"
+                    app:spinner_popup_elevation="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/txtet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="Select Edition:"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/psvEd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#E91E63"
+                    android:gravity="center"
+                    android:hint="Select Edition"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textSize="14.5sp"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="8dp"
+                    app:spinner_divider_color="@color/colorPrimaryDark"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="0.4dp"
+                    app:spinner_popup_animation="dropdown"
+                    app:spinner_popup_background="#C4AEEC"
+                    app:spinner_popup_elevation="14dp" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtsr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="Select Surah:"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            android:id="@+id/search_surah"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:smsp_enableSearchHeader="true"
+            app:smsp_floatingLabelColor="#1976D2"
+            app:smsp_floatingLabelText="Search Surah Here"
+            app:smsp_hint="Type the name of Surah"
+            app:smsp_hintColor="#388E3C"
+            app:smsp_isSearchable="true"
+            app:smsp_itemColor="#512DA8"
+            app:smsp_itemListColor="#7C4DFF"
+            app:smsp_itemListHintBackgroundColor="#808080"
+            app:smsp_itemListHintColor="#FFFFFF"
+            app:smsp_multilineError="false"
+            app:smsp_selectedItemListColor="#FF5252" />
+
+        <EditText
+            android:id="@+id/etsrchkey"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#9EABF3"
+            android:hint="Type here to Autodetect"
+            android:imeOptions="actionDone"
+            android:padding="2dp" />
+
+        <Button
+            android:id="@+id/btntrsr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_sear"
+            android:padding="2dp"
+            android:text="Search"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="2dp"
+            android:gravity="end"
+            android:padding="1dp"
+            android:text="Total Count:"
+            android:textColor="@color/juzColor"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll786"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/toolbar"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="7">
+
+            <Button
+                android:id="@+id/btnPrev"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="2"
+                android:background="@drawable/ic_prev" />
+
+            <TextView
+                android:id="@+id/txtCount"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:background="@drawable/custom_grid_layout"
+                android:gravity="center"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/txtCountFixed"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:background="@drawable/custom_grid_layout"
+                android:gravity="center"
+                android:text="2"
+                android:textSize="28sp" />
+
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="2"
+                android:background="@drawable/ic_next" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="#FAF7F7">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclesearchresults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp"
+                android:padding="10dp" />
+
+            <RelativeLayout
+                android:id="@+id/noLayout"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="10dp"
+                android:background="#FAF7F7">
+
+
+                <TextView
+                    android:id="@+id/txtNotAvail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="125dp"
+                    android:text="Not Available in this Language,Please Select a different format or different Language" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/progressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="10dp"
+                android:background="#FAF7F7">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/colorPrimary" />
+    </LinearLayout>
+</ScrollView>

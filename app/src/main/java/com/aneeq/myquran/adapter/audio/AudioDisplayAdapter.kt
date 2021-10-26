@@ -1,4 +1,4 @@
-package com.aneeq.myquran.adapter
+package com.aneeq.myquran.adapter.audio
 
 import android.app.Activity
 import android.content.Context
@@ -14,18 +14,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.NavigActivity
-import com.aneeq.myquran.models.Editions
+import com.aneeq.myquran.models.JuzList
 
 
-class AudioDisplayAdapter(val context: Context, var adList: ArrayList<Editions>) :
+class AudioDisplayAdapter(val context: Context, var adList: ArrayList<JuzList>) :
     RecyclerView.Adapter<AudioDisplayAdapter.ADViewHolder>() {
     lateinit var sharedPreferences: SharedPreferences
 
     class ADViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val llContent: LinearLayout = view.findViewById(R.id.llContent)
-        val txtenglishname: TextView = view.findViewById(R.id.txtenglishname)
         val txthname: TextView = view.findViewById(R.id.txthname)
-        val btnSelect: ImageView = view.findViewById(R.id.btnSelect)
+        val imgsrc: ImageView = view.findViewById(R.id.imgsrc)
 
     }
 
@@ -40,21 +39,23 @@ class AudioDisplayAdapter(val context: Context, var adList: ArrayList<Editions>)
     }
 
     override fun onBindViewHolder(holder: ADViewHolder, position: Int) {
+        sharedPreferences =
+            context.getSharedPreferences("Messenger Preferences", Context.MODE_PRIVATE)
         val sq = adList[position]
-        holder.txtenglishname.text = sq.englishName
         holder.txthname.text = sq.name
-        holder.btnSelect.setOnClickListener {
-            sharedPreferences.edit().putString("audio", sq.identifier).apply()
-
+        holder.llContent.setOnClickListener {
+            sharedPreferences.edit().putInt("audio", sq.page).apply()
+            sharedPreferences.edit().putString("imam", sq.name).apply()
             Toast.makeText(
                 context,
-                "Your Edition ${sq.identifier} has been saved",
+                "The reciter name ${sq.name} has been saved",
                 Toast.LENGTH_SHORT
             ).show()
 
             val intent = Intent(context, NavigActivity::class.java)
             context.startActivity(intent)
             (context as Activity).finishAffinity()
+
         }
 
     }
