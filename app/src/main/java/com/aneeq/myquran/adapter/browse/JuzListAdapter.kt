@@ -14,10 +14,9 @@ import com.aneeq.myquran.adapter.GetAllFavAsyncTask
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.models.JuzList
 import java.util.*
-import kotlin.collections.ArrayList
 
 class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
-    RecyclerView.Adapter<JuzListAdapter.JLViewHolder>(),Filterable {
+    RecyclerView.Adapter<JuzListAdapter.JLViewHolder>(), Filterable {
     var searchFilterList = ArrayList<JuzList>()
 
     init {
@@ -43,12 +42,12 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
 
     override fun onBindViewHolder(holder: JLViewHolder, position: Int) {
         val jq = jlList[position]
-        holder.txtnumber.text = "${position+1}."
+        holder.txtnumber.text = "${position + 1}."
         holder.txtjuzname.text = jq.name
         holder.btnAddFav.setImageResource(R.drawable.ic_fav)
         holder.llContent.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, ReciteJuzActivity::class.java)
-            intent.putExtra("page",jq.page)
+            intent.putExtra("page", jq.page)
 //            intent.putExtra("jname",jq.name)
             context.startActivity(intent)
 
@@ -56,7 +55,7 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
         })
 
         val listOfFavourites = GetAllFavAsyncTask(context).execute().get()
-        if (listOfFavourites.isNotEmpty() && listOfFavourites.contains(jq.number.toString())) {
+        if (listOfFavourites.isNotEmpty() && listOfFavourites.contains("j${jq.number}")) {
             holder.btnAddFav.setImageResource(R.drawable.ic_staryellow)
         } else {
             holder.btnAddFav.setImageResource(R.drawable.ic_fav)
@@ -65,7 +64,7 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
         holder.btnAddFav.setOnClickListener {
             val restaurantEntity =
                 FavouritesEntity(
-                    jq.number,
+                    "j${jq.number}",
                     jq.name,
                     jq.page,
                     "",
@@ -75,14 +74,14 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
                 val result = DBAsyncTask(context, restaurantEntity, 2).execute().get()
                 //val result = async.get()
                 if (result) {
-                    Toast.makeText(context, "Surah Added To Favourites", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Juz Added To Favourites", Toast.LENGTH_LONG)
                         .show()
                     holder.btnAddFav.setImageResource(R.drawable.ic_staryellow)
                 }
             } else {
                 val result = DBAsyncTask(context, restaurantEntity, 3).execute().get()
                 if (result) {
-                    Toast.makeText(context, "Surah Removed from Favourites", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Juz Removed from Favourites", Toast.LENGTH_LONG)
                         .show()
                     holder.btnAddFav.setImageResource(R.drawable.ic_fav)
 
@@ -99,11 +98,11 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
                 if (charString.isEmpty()) {
                     searchFilterList = jlList
                 } else {
-                    val filteredList=ArrayList<JuzList>()
+                    val filteredList: ArrayList<JuzList> = ArrayList()
 
                     for (row in jlList) {
-                        if (row.name.lowercase(Locale.getDefault())
-                                .contains(charString) || row.number.toString()
+                        if (row.getJuzName().lowercase(Locale.getDefault())
+                                .contains(charString) || row.getJuzNum()
                                 .contains(charString)
                         ) {
                             filteredList.add(row)
@@ -116,6 +115,7 @@ class JuzListAdapter(val context: Context, var jlList: ArrayList<JuzList>) :
                 filterResults.values = searchFilterList
                 return filterResults
             }
+
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
                 searchFilterList = p1?.values as ArrayList<JuzList>

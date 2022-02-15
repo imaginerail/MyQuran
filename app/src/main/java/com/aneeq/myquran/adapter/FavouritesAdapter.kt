@@ -43,7 +43,7 @@ class FavouritesAdapter(val context: Context, var fList: ArrayList<FavouritesEnt
 
     override fun onBindViewHolder(holder: SLViewHolder, position: Int) {
         val fq = fList[position]
-        holder.txtnumber.text = "${fq.number}"
+        holder.txtnumber.text = "${fq.number.subSequence(1, fq.number.length)}"
         holder.txtsurahname.text = fq.englishNamePara
         if (fq.revelationType != "") {
             holder.txrevanum.text = "(${fq.revelationType} Total Ayats: ${fq.numberOfAyahsPage})"
@@ -52,14 +52,14 @@ class FavouritesAdapter(val context: Context, var fList: ArrayList<FavouritesEnt
             holder.llContent.setBackgroundColor(Color.parseColor("#9C27B0"))
         }
 
-        holder.llContent.setOnClickListener(View.OnClickListener {
+        holder.llContent.setOnClickListener {
             val intent = Intent(context, ReciteJuzActivity::class.java)
             if (fq.revelationType != "") {
-                intent.putExtra("isSurah",true)
+                intent.putExtra("isSurah", true)
             }
             intent.putExtra("page", fq.page)
             context.startActivity(intent)
-        })
+        }
 
         holder.btnAddFav.setImageResource(R.drawable.ic_staryellow)
 
@@ -67,7 +67,11 @@ class FavouritesAdapter(val context: Context, var fList: ArrayList<FavouritesEnt
 
             val result = DBAsyncTask(context, fq, 3).execute().get()
             if (result) {
-                Toast.makeText(context, "${fq.englishNamePara} Removed from Favourites", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    context,
+                    "${fq.englishNamePara} Removed from Favourites",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 holder.btnAddFav.setImageResource(R.drawable.ic_fav)
                 refresh()

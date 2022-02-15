@@ -73,7 +73,7 @@ class TNEAdapter(
             Toast.makeText(
                 context,
                 "Your Edition ${sq.identifier} has been saved",
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
 
             val intent = Intent(context, NavigActivity::class.java)

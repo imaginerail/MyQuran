@@ -1,9 +1,7 @@
 package com.aneeq.myquran.activity
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -33,8 +31,6 @@ import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.skydoves.powerspinner.PowerSpinnerView
 import org.json.JSONException
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SrchByTxtActivity : AppCompatActivity() {
@@ -278,19 +274,21 @@ class SrchByTxtActivity : AppCompatActivity() {
                 TranslateAPI(Language.AUTO_DETECT, standardLangs[p], etsrchkey.text.toString())
             translateAP.setTranslateListener(object : TranslateAPI.TranslateListener {
                 override fun onSuccess(translatedText: String?) {
-                    etsrchkey.setOnEditorActionListener { textView, i, _ ->
 
-                        if (i == EditorInfo.IME_ACTION_DONE) {
-                            textView.text = translatedText
-                            val imm: InputMethodManager =
-                                textView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                            imm.hideSoftInputFromWindow(textView.windowToken, 0)
-                            true
-                        } else {
-                            false
+                    etsrchkey.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                            v.text = translatedText
+
+                            (v.context.getSystemService(INPUT_METHOD_SERVICE)
+                                    as InputMethodManager)
+                                .hideSoftInputFromWindow(v.windowToken, 0)
+
+                            return@OnEditorActionListener true
                         }
+                        false
+                    })
+                    //////////////////////////////////////
 
-                    }
                     par1 = translatedText!!
                     displayResults(
                         translatedText,
@@ -375,9 +373,8 @@ class SrchByTxtActivity : AppCompatActivity() {
                                 sarList, par1
                             )
 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            scrollView.isNestedScrollingEnabled = false
-                        }
+                        recyclesearchresults.isNestedScrollingEnabled = false
+
 
                         val mLayoutManager: LinearLayoutManager =
                             LinearLayoutManager(this)

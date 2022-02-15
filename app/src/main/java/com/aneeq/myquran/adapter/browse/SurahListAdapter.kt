@@ -16,7 +16,6 @@ import com.aneeq.myquran.database.favouritesdatabase.FavouritesDatabase
 import com.aneeq.myquran.database.favouritesdatabase.FavouritesEntity
 import com.aneeq.myquran.models.SurahList
 import java.util.*
-import kotlin.collections.ArrayList
 
 class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
     RecyclerView.Adapter<SurahListAdapter.SLViewHolder>(), Filterable {
@@ -60,7 +59,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
         })
 
         val listOfFavourites = GetAllFavAsyncTask(context).execute().get()
-        if (listOfFavourites.isNotEmpty() && listOfFavourites.contains(sq.number.toString())) {
+        if (listOfFavourites.isNotEmpty() && listOfFavourites.contains("s${sq.number}")) {
             holder.btnAddFav.setImageResource(R.drawable.ic_staryellow)
         } else {
             holder.btnAddFav.setImageResource(R.drawable.ic_fav)
@@ -69,7 +68,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
         holder.btnAddFav.setOnClickListener {
             val restaurantEntity =
                 FavouritesEntity(
-                    sq.number.toString(),
+                    "s${sq.number}",
                     sq.englishName,
                     sq.numberOfAyahs,
                     sq.revelationType,
@@ -79,14 +78,14 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
                 val result = DBAsyncTask(context, restaurantEntity, 2).execute().get()
                 //val result = async.get()
                 if (result) {
-                    Toast.makeText(context, "Surah Added To Favourites", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Surah Added To Favourites", Toast.LENGTH_SHORT)
                         .show()
                     holder.btnAddFav.setImageResource(R.drawable.ic_staryellow)
                 }
             } else {
                 val result = DBAsyncTask(context, restaurantEntity, 3).execute().get()
                 if (result) {
-                    Toast.makeText(context, "Surah Removed from Favourites", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Surah Removed from Favourites", Toast.LENGTH_SHORT)
                         .show()
                     holder.btnAddFav.setImageResource(R.drawable.ic_fav)
 
@@ -104,7 +103,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
                 if (charString.isEmpty()) {
                     searchFilterList = slList
                 } else {
-                    val filteredList = ArrayList<SurahList>()
+                    val filteredList: ArrayList<SurahList> = ArrayList()
 
                     for (row in slList) {
                         if (row.englishName.lowercase(Locale.getDefault())
@@ -117,7 +116,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
 
                     searchFilterList = filteredList
 
-                    for(i in 1..filteredList.size){
+                    for (i in 1..filteredList.size) {
                         Log.d("srch", filteredList[i].toString())
                     }
                 }
@@ -128,7 +127,7 @@ class SurahListAdapter(val context: Context, var slList: ArrayList<SurahList>) :
 
 
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                searchFilterList = if(p1?.values==null)
+                searchFilterList = if (p1?.values == null)
                     ArrayList()
                 else
                     p1.values as ArrayList<SurahList>

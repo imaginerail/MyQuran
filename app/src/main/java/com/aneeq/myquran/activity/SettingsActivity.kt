@@ -3,16 +3,15 @@ package com.aneeq.myquran.activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.appcompat.widget.SwitchCompat
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import com.aneeq.myquran.R
 import java.util.*
@@ -80,14 +79,31 @@ class SettingsActivity : AppCompatActivity() {
     }
 //Locale(sq.language)
     private fun setUpTextTranslate() {
-        txtActualTrans.text = "${getString(R.string.Identifier)} : ${sharedPreferences.getString("identifier", "")}\n" +
-                "${getString(R.string.Language)} : ${Locale(sharedPreferences.getString("language", "")).displayLanguage}\n" +
-                "${getString(R.string.Name)} : ${sharedPreferences.getString("name", "")}\n" +
-                "${getString(R.string.EnglishName)} : ${sharedPreferences.getString("englishName", "")}\n" +
-                "${getString(R.string.Format)} : ${sharedPreferences.getString("format", "")}\n" +
-                "${getString(R.string.Type)} : ${sharedPreferences.getString("type", "")}\n"
+    txtActualTrans.text = "${getString(R.string.Identifier)} : ${
+        sharedPreferences.getString(
+            "identifier",
+            "en.maududi"
+        )
+    }\n" +
+            "${"Language"} : ${
+                Locale(
+                    sharedPreferences.getString(
+                        "language",
+                        "English"
+                    )
+                ).displayLanguage
+            }\n" +
+            "${getString(R.string.Name)} : ${sharedPreferences.getString("name", "Maududi")}\n" +
+            "${getString(R.string.EnglishName)} : ${
+                sharedPreferences.getString(
+                    "englishName",
+                    "Abul Ala Maududi"
+                )
+            }\n" +
+            "${getString(R.string.Format)} : ${sharedPreferences.getString("format", "text")}\n" +
+            "${getString(R.string.Type)} : ${sharedPreferences.getString("type", "translation")}\n"
 
-    }
+}
 
     private fun openConfirmDialog() {
         val dialog = AlertDialog.Builder(this)

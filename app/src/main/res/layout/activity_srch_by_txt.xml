@@ -150,16 +150,15 @@
         <EditText
             android:id="@+id/etsrchkey"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="#9EABF3"
             android:hint="Type here to Autodetect"
-            android:imeOptions="actionDone"
             android:padding="2dp" />
 
         <Button
             android:id="@+id/btntrsr"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
@@ -259,23 +258,24 @@
                     android:layout_marginTop="125dp"
                     android:text="Not Available in this Language,Please Select a different format or different Language" />
 
+                <RelativeLayout
+                    android:id="@+id/progressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FAF7F7">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/progressLayout"
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginTop="10dp"
-                android:background="#FAF7F7">
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
-
-            </RelativeLayout>
         </RelativeLayout>
 
         <View

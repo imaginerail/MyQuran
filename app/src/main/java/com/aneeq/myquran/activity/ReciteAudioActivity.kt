@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -36,6 +37,7 @@ class ReciteAudioActivity : AppCompatActivity() {
     lateinit var reciteSurahAdapter: ReciteAudioAdapter
     lateinit var argmusicplayer: ArgPlayerSmallView
     lateinit var fabplay: FloatingActionButton
+    lateinit var txtwhois: TextView
     val aList = arrayListOf<AudioClass>()
 
 
@@ -50,7 +52,15 @@ class ReciteAudioActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         argmusicplayer = findViewById(R.id.argmusicplayer)
         fabplay = findViewById(R.id.fabplay)
+        txtwhois = findViewById(R.id.txtwhois)
 
+
+        txtwhois.text = "You are listening to ${
+            sharedPreferences.getString(
+                "imam",
+                "Abdul Basit Murattal"
+            )
+        }.\n To change the reciter, go to settings."
 
         setUpRecyclerSurah()
     }

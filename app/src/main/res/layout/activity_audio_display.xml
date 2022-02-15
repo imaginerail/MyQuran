@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3A3BD"
     tools:context=".activity.AudioDisplayActivity">
 
     <TextView
         android:id="@+id/txtSelectln"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="Select the Audio Edition you wish to Listen to"
         android:textAlignment="center"
@@ -23,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtSelectln"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleAD"

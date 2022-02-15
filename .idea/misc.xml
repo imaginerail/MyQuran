@@ -8,6 +8,7 @@
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundagain.xml" value="0.19166666666666668" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedets.xml" value="0.19166666666666668" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedetsmirror.xml" value="0.19166666666666668" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedfloatingbg.xml" value="0.2101851851851852" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/drawable/roundedll.xml" value="0.240625" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_audio_display.xml" value="0.10916919959473151" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_music_test.xml" value="0.22" />
@@ -24,6 +25,7 @@
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_type_n_edition.xml" value="0.129981884057971" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/audio_display_recyclerview_single_row.xml" value="0.25" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_audio.xml" value="0.16032608695652173" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_browse.xml" value="0.10916919959473151" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_juz.xml" value="0.129981884057971" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/jlist_recycler_single_row.xml" value="0.10916919959473151" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_surah_audio_single_row.xml" value="0.25" />
@@ -32,6 +34,7 @@
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/search_text_results_recycler_single_row.xml" value="0.22" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/slist_recycler_single_row.xml" value="0.14764492753623187" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/sq_recycler_single_row.xml" value="0.14764492753623187" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/menu/menu_tool.xml" value="0.1675925925925926" />
       </map>
     </option>
   </component>
