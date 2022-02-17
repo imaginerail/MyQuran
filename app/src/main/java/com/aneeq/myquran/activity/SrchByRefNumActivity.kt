@@ -30,6 +30,9 @@ import com.aneeq.myquran.database.seleddatabase.SelEntity
 import com.aneeq.myquran.models.Editions
 import com.aneeq.myquran.models.SearchAyahResults
 import com.aneeq.myquran.util.ConnectionManager
+import com.skydoves.powerspinner.IconSpinnerAdapter
+import com.skydoves.powerspinner.IconSpinnerItem
+import com.skydoves.powerspinner.PowerSpinnerView
 import org.json.JSONException
 
 class SrchByRefNumActivity : AppCompatActivity() {
@@ -52,20 +55,17 @@ class SrchByRefNumActivity : AppCompatActivity() {
     lateinit var txtSME: TextView
     lateinit var etAyahNum: EditText
     lateinit var etSurahNum: EditText
-    lateinit var txtLanguage: TextView
-    lateinit var txtFormat: TextView
-    lateinit var txtSelectType: TextView
     lateinit var txtIsto: TextView
     lateinit var btnfilter: Button
-    lateinit var spinner1: Spinner
-    lateinit var spinner2: Spinner
-    lateinit var spinner3: Spinner
+
+    lateinit var psvlEd: PowerSpinnerView
+
+
     lateinit var btnsearch: Button
     lateinit var txtayahdetails: TextView
     var sarList = arrayListOf<SearchAyahResults>()
     val tneList = arrayListOf<Editions>()
     var seled = arrayListOf<SelEntity>()
-    var langCodes = arrayOf<String>()
     var lan = "ar"
     var form = "text"
     var type = "translation"
@@ -75,39 +75,35 @@ class SrchByRefNumActivity : AppCompatActivity() {
         txtayahdetails = findViewById(R.id.txtayahdetails)
         txtClr = findViewById(R.id.txtClr)
         txtSSE = findViewById(R.id.txtSSE)
+        psvlEd = findViewById(R.id.psvlEd)
         btnfilter = findViewById(R.id.btnfilter)
         scrollView = findViewById(R.id.scrollView)
-        llfilter = findViewById(R.id.llfilter)
         toolbar = findViewById(R.id.toolbar)
         txtSME = findViewById(R.id.txtSME)
         txtTRBF = findViewById(R.id.txtTRBF)
         txtIsto = findViewById(R.id.txtIsto)
-        txtLanguage = findViewById(R.id.txtLanguage)
-        txtFormat = findViewById(R.id.txtFormat)
-        txtSelectType = findViewById(R.id.txtSelectType)
         etAyahNum = findViewById(R.id.etAyahNum)
         etSurahNum = findViewById(R.id.etSurahNum)
         txtNotAvail = findViewById(R.id.txtNotAvail)
         btnsearch = findViewById(R.id.btnsearch)
-        spinner1 = findViewById(R.id.spinner1)
-        spinner2 = findViewById(R.id.spinner2)
-        spinner3 = findViewById(R.id.spinner3)
         recycleAyahs = findViewById(R.id.recycleAyahs)
         recycleSSE = findViewById(R.id.recycleSSE)
+
+
         txtNotAvail.visibility = View.GONE
-        llfilter.visibility = View.GONE
-        btnfilter.visibility = View.GONE
+        btnfilter.visibility = View.VISIBLE
+
         seled.clear()
         seled = RetrieveSelEds(this).execute().get() as ArrayList<SelEntity>
         txtSME.setOnClickListener {
 
-            if (llfilter.visibility != View.VISIBLE && btnfilter.visibility != View.VISIBLE) {
-                llfilter.visibility = View.VISIBLE
-                btnfilter.visibility = View.VISIBLE
-            } else {
-                llfilter.visibility = View.GONE
-                btnfilter.visibility = View.GONE
-            }
+//            if (llfilter.visibility != View.VISIBLE && btnfilter.visibility != View.VISIBLE) {
+//                llfilter.visibility = View.VISIBLE
+//                btnfilter.visibility = View.VISIBLE
+//            } else {
+//                llfilter.visibility = View.GONE
+//                btnfilter.visibility = View.GONE
+//            }
 
         }
 
@@ -121,13 +117,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
         }
 
         setupSpinner1()
-        setupSpinner2()
-        setupSpinner3()
         setupToolBar()
-
-        btnfilter.setOnClickListener {
-            setUpEditionRecycler(lan, form, type)
-        }
 
         btnsearch.setOnClickListener {
             if (etSurahNum.text.isEmpty() && etAyahNum.text.isEmpty()) {
@@ -331,18 +321,26 @@ class SrchByRefNumActivity : AppCompatActivity() {
                             else "No"
 
                             txtayahdetails.text = "Details:\n" +
-                                    "It is the Ayah no.${data.getInt("numberInSurah")} of Surah no. ${surah.getInt(
-                                        "number"
-                                    )}" +
-                                    " which is Surah ${surah.getString("name")}(${surah.getString("englishName")}) translated as '${surah.getString(
-                                        "englishNameTranslation"
-                                    )}'" +
-                                    "This is a ${surah.getString("revelationType")} surah having a total of ${surah.getInt(
-                                        "numberOfAyahs"
-                                    )} Ayahs." +
-                                    "This Surah is taken from Juz no. ${data.getInt("juz")} and Manzil no. ${data.getInt(
-                                        "manzil"
-                                    )}." +
+                                    "It is the Ayah no.${data.getInt("numberInSurah")} of Surah no. ${
+                                        surah.getInt(
+                                            "number"
+                                        )
+                                    }" +
+                                    " which is Surah ${surah.getString("name")}(${surah.getString("englishName")}) translated as '${
+                                        surah.getString(
+                                            "englishNameTranslation"
+                                        )
+                                    }'" +
+                                    "This is a ${surah.getString("revelationType")} surah having a total of ${
+                                        surah.getInt(
+                                            "numberOfAyahs"
+                                        )
+                                    } Ayahs." +
+                                    "This Surah is taken from Juz no. ${data.getInt("juz")} and Manzil no. ${
+                                        data.getInt(
+                                            "manzil"
+                                        )
+                                    }." +
                                     "Is this the Ayah of Sajdah? $sajda"
 
 
@@ -407,11 +405,11 @@ class SrchByRefNumActivity : AppCompatActivity() {
     }
 
 
-    private fun setUpEditionRecycler(lan: String, form: String, type: String) {
+    private fun setUpEditionRecycler(lan: String) {
         tneList.clear()
         recycleEditions = findViewById(R.id.recycleEditions)
         val queue = Volley.newRequestQueue(this)
-        val url = "http://api.alquran.cloud/v1/edition?format=$form&language=$lan&type=$type"
+        val url = "http://api.alquran.cloud/v1/edition?format=text&language=$lan&type=translation"
 
         if (ConnectionManager().checkConnection(this)) {
 
@@ -488,74 +486,29 @@ class SrchByRefNumActivity : AppCompatActivity() {
 
     }
 
-    private fun setupSpinner3() {
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.type,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner3.adapter = adapter
-        spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                //
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-                type = p0?.getItemAtPosition(p2).toString()
-
-
-            }
-
-        }
-    }
-
-    private fun setupSpinner2() {
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.format,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner2.adapter = adapter
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                //
-            }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-                form = p0?.getItemAtPosition(p2).toString()
-
-
-            }
-
-        }
-
-    }
-
     private fun setupSpinner1() {
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.language,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner1.adapter = adapter
-        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                //
+
+        psvlEd.apply {
+            setSpinnerAdapter(IconSpinnerAdapter(this))
+            setItems(
+                arrayListOf(
+                    IconSpinnerItem(text = "ENGLISH"),
+                    IconSpinnerItem(text = "ARABIC"),
+                    IconSpinnerItem(text = "HINDI"),
+                    IconSpinnerItem(text = "INDONESIAN"),
+                    IconSpinnerItem(text = "URDU"),
+
+                    )
+            )
+            setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, pos, item ->
+
+                val langarray = arrayListOf("en", "ar", "hi", "id", "ur")
+                lan = langarray[pos]
+                setUpEditionRecycler(lan)
             }
-
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-                langCodes = arrayOf("ar", "en", "hi", "fa", "id", "ja", "pl", "ru", "tr", "ur")
-                lan = langCodes[p2]
-
-
-            }
-
+            getSpinnerRecyclerView().layoutManager = GridLayoutManager(baseContext, 1)
+            // selectItemByIndex(4)
+            preferenceName = "language"
         }
 
 

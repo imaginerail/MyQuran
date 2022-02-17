@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
@@ -76,104 +77,59 @@
                 android:hint="Type Ayah No." />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtSME"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Multiple Editions"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic" />
-
         <LinearLayout
-            android:id="@+id/llfilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:baselineAligned="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:padding="3dp"
             android:weightSum="6">
 
-            <RelativeLayout
+
+            <TextView
+                android:id="@+id/txtSME"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2">
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="Select Multiple Editions"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
-                <TextView
-                    android:id="@+id/txtLanguage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Select Language"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spinner1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtLanguage"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/custom_grid_layout"
-                    android:gravity="center" />
-            </RelativeLayout>
-
-            <RelativeLayout
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/psvlEd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2">
-
-                <TextView
-                    android:id="@+id/txtFormat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Select Format"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtFormat"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/custom_grid_layout"
-                    android:gravity="center" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2">
-
-                <TextView
-                    android:id="@+id/txtSelectType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Select Type"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtSelectType"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/custom_grid_layout"
-                    android:gravity="center" />
-            </RelativeLayout>
+                android:layout_weight="3"
+                android:background="#E91E63"
+                android:gravity="center"
+                android:hint="Select Language"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:textSize="14.5sp"
+                app:spinner_arrow_gravity="end"
+                app:spinner_arrow_padding="8dp"
+                app:spinner_divider_color="@color/colorPrimaryDark"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="0.4dp"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="#C4AEEC"
+                app:spinner_popup_elevation="14dp" />
         </LinearLayout>
+
 
         <Button
             android:id="@+id/btnfilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:text="Filter"
             android:textSize="15sp" />

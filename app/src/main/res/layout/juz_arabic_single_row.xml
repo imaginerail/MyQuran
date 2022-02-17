@@ -13,18 +13,19 @@
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
         android:background="#D18973"
-        android:orientation="vertical">
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="3dp">
 
         <TextView
             android:id="@+id/txtquran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
             android:padding="3dp"
-            android:text="Alif Laam Meem"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="20sp"
             android:textStyle="bold" />

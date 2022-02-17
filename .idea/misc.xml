@@ -17,8 +17,8 @@
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_recite_surah.xml" value="0.12454710144927536" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_settings.xml" value="0.10916919959473151" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_splash.xml" value="0.16032608695652173" />
-        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_ref_num.xml" value="0.1322463768115942" />
-        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_txt.xml" value="0.22" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_ref_num.xml" value="0.25" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_srch_by_txt.xml" value="0.33" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_start_reading.xml" value="0.18885869565217392" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_test_music.xml" value="0.18432971014492755" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/activity_test_music_github.xml" value="0.25" />
@@ -28,6 +28,7 @@
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_browse.xml" value="0.10916919959473151" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/fragment_juz.xml" value="0.129981884057971" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/jlist_recycler_single_row.xml" value="0.10916919959473151" />
+        <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_arabic_single_row.xml" value="0.19972826086956522" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_surah_audio_single_row.xml" value="0.25" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/juz_translate_single_row.xml" value="0.13858695652173914" />
         <entry key="..\:/my downloads/Computer Science/My Apps/MyQuran/app/src/main/res/layout/recite_recycler_single_row.xml" value="0.14764492753623187" />

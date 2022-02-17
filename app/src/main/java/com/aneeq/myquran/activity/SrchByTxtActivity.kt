@@ -191,8 +191,10 @@ class SrchByTxtActivity : AppCompatActivity() {
                     )
             )
             setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, pos, item ->
+
                 langarrayindex = pos
                 setUpEditions(item.text.toString())
+                psvEd.text = setUpEditions(item.text.toString())[0]
             }
             getSpinnerRecyclerView().layoutManager = GridLayoutManager(baseContext, 1)
             // selectItemByIndex(4)
@@ -211,7 +213,8 @@ class SrchByTxtActivity : AppCompatActivity() {
             setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, pos, item ->
                 par3 = item.text.toString()
             }
-            getSpinnerRecyclerView().layoutManager = GridLayoutManager(baseContext, 2)
+            psvEd.spinnerPopupHeight
+            getSpinnerRecyclerView().layoutManager = LinearLayoutManager(baseContext)
             // selectItemByIndex(4)
             // preferenceName = "edition"
         }
@@ -224,8 +227,6 @@ class SrchByTxtActivity : AppCompatActivity() {
         when (ed) {
             "ENGLISH" -> editionList = arrayListOf(
                 "en",
-                "en.ahmed",
-                "en.asad",
                 "en.pickthall",
                 "en.sahih",
                 "en.maududi",
@@ -248,7 +249,6 @@ class SrchByTxtActivity : AppCompatActivity() {
                 "ur",
                 "ur.ahmedali",
                 "ur.jalandhr",
-                "ur.qadri",
                 "ur.junagarhi",
                 "ur.maududi"
 
