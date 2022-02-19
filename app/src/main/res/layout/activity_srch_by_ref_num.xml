@@ -124,15 +124,10 @@
                 app:spinner_popup_elevation="14dp" />
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/btnfilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="Filter"
-            android:textSize="15sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -145,22 +140,51 @@
                 android:layout_marginTop="10dp"
                 android:padding="10dp" />
 
-            <TextView
-                android:id="@+id/txtNotAvail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Not Available in this Language,Please Select a different format or different Language" />
-
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txtSSE"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show Selected Editions"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic" />
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="1dp"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/txtSSE"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Show Selected Editions"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+
+            <Button
+                android:id="@+id/txtClr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_delete"
+                android:padding="2dp"
+                android:text="Clear"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleSSE"
@@ -169,13 +193,10 @@
             android:layout_marginTop="10dp"
             android:padding="10dp" />
 
-        <TextView
-            android:id="@+id/txtClr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Clear"
-            android:textSize="12sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
 
         <Button
             android:id="@+id/btnsearch"
@@ -192,6 +213,11 @@
             android:layout_margin="8dp"
             android:padding="3dp"
             android:textSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleAyahs"

@@ -31,6 +31,17 @@
             android:layout_weight="2"
             android:background="@drawable/ic_prev" />
 
+        <EditText
+            android:id="@+id/etCount"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:background="@drawable/custom_grid_layout"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/txtCount"
             android:layout_width="0dp"

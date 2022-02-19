@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -37,7 +36,6 @@ import org.json.JSONException
 
 class SrchByRefNumActivity : AppCompatActivity() {
     lateinit var recycleEditions: RecyclerView
-    lateinit var txtNotAvail: TextView
     lateinit var selectMultEditionAdapter: SelectMultEditionAdapter
 
     lateinit var recycleSSE: RecyclerView
@@ -56,7 +54,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
     lateinit var etAyahNum: EditText
     lateinit var etSurahNum: EditText
     lateinit var txtIsto: TextView
-    lateinit var btnfilter: Button
+
 
     lateinit var psvlEd: PowerSpinnerView
 
@@ -66,8 +64,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
     var sarList = arrayListOf<SearchAyahResults>()
     val tneList = arrayListOf<Editions>()
     var seled = arrayListOf<SelEntity>()
-    var lan = "ar"
-    var form = "text"
+    private var lan = "ar"
     var type = "translation"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +73,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
         txtClr = findViewById(R.id.txtClr)
         txtSSE = findViewById(R.id.txtSSE)
         psvlEd = findViewById(R.id.psvlEd)
-        btnfilter = findViewById(R.id.btnfilter)
+
         scrollView = findViewById(R.id.scrollView)
         toolbar = findViewById(R.id.toolbar)
         txtSME = findViewById(R.id.txtSME)
@@ -84,14 +81,14 @@ class SrchByRefNumActivity : AppCompatActivity() {
         txtIsto = findViewById(R.id.txtIsto)
         etAyahNum = findViewById(R.id.etAyahNum)
         etSurahNum = findViewById(R.id.etSurahNum)
-        txtNotAvail = findViewById(R.id.txtNotAvail)
+
         btnsearch = findViewById(R.id.btnsearch)
         recycleAyahs = findViewById(R.id.recycleAyahs)
         recycleSSE = findViewById(R.id.recycleSSE)
 
 
-        txtNotAvail.visibility = View.GONE
-        btnfilter.visibility = View.VISIBLE
+
+
 
         seled.clear()
         seled = RetrieveSelEds(this).execute().get() as ArrayList<SelEntity>
@@ -164,20 +161,18 @@ class SrchByRefNumActivity : AppCompatActivity() {
                         sarList.add(searchAyahResults)
 
 
-                        if (this != null) {
-                            searchAyahResultsAdapter =
-                                SearchAyahResultsAdapter(
-                                    this,
-                                    sarList
-                                )
-                            val mLayoutManager =
-                                LinearLayoutManager(this)
-                            recycleAyahs.layoutManager = mLayoutManager
-                            recycleAyahs.itemAnimator = DefaultItemAnimator()
-                            recycleAyahs.adapter = searchAyahResultsAdapter
-                            recycleAyahs.setHasFixedSize(true)
-                            recycleAyahs.isNestedScrollingEnabled = false
-                        }
+                        searchAyahResultsAdapter =
+                            SearchAyahResultsAdapter(
+                                this,
+                                sarList
+                            )
+                        val mLayoutManager =
+                            LinearLayoutManager(this)
+                        recycleAyahs.layoutManager = mLayoutManager
+                        recycleAyahs.itemAnimator = DefaultItemAnimator()
+                        recycleAyahs.adapter = searchAyahResultsAdapter
+                        recycleAyahs.setHasFixedSize(true)
+                        recycleAyahs.isNestedScrollingEnabled = false
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -193,14 +188,12 @@ class SrchByRefNumActivity : AppCompatActivity() {
                 },
                 Response.ErrorListener {
                     //println("Error is $it")
-                    if (this != null) {
-                        Toast.makeText(
-                            this,
-                            "Volley Error Occurred",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Volley Error Occurred",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }) {
 
             }
@@ -247,20 +240,18 @@ class SrchByRefNumActivity : AppCompatActivity() {
 
 
 
-                        if (this != null) {
-                            searchAyahResultsAdapter =
-                                SearchAyahResultsAdapter(
-                                    this,
-                                    sarList
-                                )
-                            val mLayoutManager =
-                                LinearLayoutManager(this)
-                            recycleAyahs.layoutManager = mLayoutManager
-                            recycleAyahs.itemAnimator = DefaultItemAnimator()
-                            recycleAyahs.adapter = searchAyahResultsAdapter
-                            recycleAyahs.setHasFixedSize(true)
-                            recycleAyahs.isNestedScrollingEnabled = false
-                        }
+                        searchAyahResultsAdapter =
+                            SearchAyahResultsAdapter(
+                                this,
+                                sarList
+                            )
+                        val mLayoutManager =
+                            LinearLayoutManager(this)
+                        recycleAyahs.layoutManager = mLayoutManager
+                        recycleAyahs.itemAnimator = DefaultItemAnimator()
+                        recycleAyahs.adapter = searchAyahResultsAdapter
+                        recycleAyahs.setHasFixedSize(true)
+                        recycleAyahs.isNestedScrollingEnabled = false
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -276,14 +267,12 @@ class SrchByRefNumActivity : AppCompatActivity() {
                 },
                 Response.ErrorListener {
                     //println("Error is $it")
-                    if (this != null) {
-                        Toast.makeText(
-                            this,
-                            "Volley Error Occurred",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Volley Error Occurred",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }) {
 
             }
@@ -320,7 +309,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
                             sajda = if (data.getBoolean("sajda")) "Yes"
                             else "No"
 
-                            txtayahdetails.text = "Details:\n" +
+                            val t = "Details:\n" +
                                     "It is the Ayah no.${data.getInt("numberInSurah")} of Surah no. ${
                                         surah.getInt(
                                             "number"
@@ -342,7 +331,7 @@ class SrchByRefNumActivity : AppCompatActivity() {
                                         )
                                     }." +
                                     "Is this the Ayah of Sajdah? $sajda"
-
+                            txtayahdetails.text = t
 
                         }
                     } catch (e: JSONException) {
@@ -359,14 +348,12 @@ class SrchByRefNumActivity : AppCompatActivity() {
                 },
                 Response.ErrorListener {
                     //println("Error is $it")
-                    if (this != null) {
-                        Toast.makeText(
-                            this,
-                            "Volley Error Occurred",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Volley Error Occurred",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }) {
 
             }
@@ -386,21 +373,19 @@ class SrchByRefNumActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        if (this != null) {
-            showSelectedEditionAdapter =
-                ShowSelectedEditionAdapter(
-                    this,
-                    seled
+        showSelectedEditionAdapter =
+            ShowSelectedEditionAdapter(
+                this,
+                seled
 
-                )
-            val mLayoutManager =
-                GridLayoutManager(this, 4)
-            recycleSSE.layoutManager = mLayoutManager
-            recycleSSE.itemAnimator = DefaultItemAnimator()
-            recycleSSE.adapter = showSelectedEditionAdapter
-            recycleSSE.setHasFixedSize(true)
-            recycleSSE.isNestedScrollingEnabled = false
-        }
+            )
+        val mLayoutManager =
+            GridLayoutManager(this, 3)
+        recycleSSE.layoutManager = mLayoutManager
+        recycleSSE.itemAnimator = DefaultItemAnimator()
+        recycleSSE.adapter = showSelectedEditionAdapter
+        recycleSSE.setHasFixedSize(true)
+        recycleSSE.isNestedScrollingEnabled = false
 
     }
 
@@ -419,10 +404,14 @@ class SrchByRefNumActivity : AppCompatActivity() {
 
 
                     try {
-                        if (it.getString("data") == "Invalid format") txtNotAvail.visibility =
-                            View.VISIBLE
-                        else txtNotAvail.visibility = View.GONE
-
+                        if (it.getString("data") == "Invalid format") {
+                            Toast.makeText(
+                                this,
+                                "Not Available",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                        }
 
                         val jsonArray = it.getJSONArray("data")
                         for (i in 0 until jsonArray.length()) {
@@ -437,20 +426,18 @@ class SrchByRefNumActivity : AppCompatActivity() {
                             )
                             tneList.add(editions)
                         }
-                        if (this != null) {
-                            selectMultEditionAdapter =
-                                SelectMultEditionAdapter(
-                                    this,
-                                    tneList
-                                )
-                            val mLayoutManager =
-                                GridLayoutManager(this, 3)
-                            recycleEditions.layoutManager = mLayoutManager
-                            recycleEditions.itemAnimator = DefaultItemAnimator()
-                            recycleEditions.adapter = selectMultEditionAdapter
-                            recycleEditions.setHasFixedSize(true)
-                            recycleEditions.isNestedScrollingEnabled = false
-                        }
+                        selectMultEditionAdapter =
+                            SelectMultEditionAdapter(
+                                this,
+                                tneList
+                            )
+                        val mLayoutManager =
+                            GridLayoutManager(this, 3)
+                        recycleEditions.layoutManager = mLayoutManager
+                        recycleEditions.itemAnimator = DefaultItemAnimator()
+                        recycleEditions.adapter = selectMultEditionAdapter
+                        recycleEditions.setHasFixedSize(true)
+                        recycleEditions.isNestedScrollingEnabled = false
 
 
                     } catch (e: JSONException) {
@@ -467,14 +454,12 @@ class SrchByRefNumActivity : AppCompatActivity() {
                 },
                 Response.ErrorListener {
                     //println("Error is $it")
-                    if (this != null) {
-                        Toast.makeText(
-                            this,
-                            "Volley Error Occurred",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Volley Error Occurred",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }) {
 
             }

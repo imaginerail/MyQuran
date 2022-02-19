@@ -68,7 +68,7 @@ class SelectMultEditionAdapter(val context: Context, var lnList: ArrayList<Editi
             } else {
                 val result = DBAsyncTask3(context, restaurantEntity, 3).execute().get()
                 if (result) {
-                    Toast.makeText(context, "Edition Removed", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Edition Removed", Toast.LENGTH_SHORT)
                         .show()
                     holder.llContent.setBackgroundColor(Color.parseColor("#F8ABA5"))
 

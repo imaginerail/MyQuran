@@ -17,10 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <activity
-            android:name=".TestMusicGithubActivity"
-            android:exported="true" />
+            android:name=".activity.MoreInfoActivity"
+            android:exported="false" />
         <activity
-            android:name=".TestMusicActivity"
+            android:name=".TestMusicGithubActivity"
             android:exported="true" />
         <activity
             android:name=".activity.ReciteAudioActivity"
@@ -33,7 +33,6 @@
         <activity
             android:name=".activity.NavigActivity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.ReciteJuzActivity" />
         <activity android:name=".activity.TypeNEditionActivity" />

@@ -9,10 +9,9 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
@@ -33,6 +32,7 @@ class ReciteJuzActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var toolbar: Toolbar
     lateinit var btnPrev: Button
+    lateinit var etCount: EditText
     lateinit var txtCount: TextView
     lateinit var txtCountFixed: TextView
     lateinit var txtSurah: TextView
@@ -64,6 +64,13 @@ class ReciteJuzActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         toolbar = findViewById(R.id.toolbar)
         rlsupreme = findViewById(R.id.rlsupreme)
+        etCount = findViewById(R.id.etCount)
+
+        etCount.visibility = View.GONE
+
+
+
+
 
         c = intent.getIntExtra("page", 604)
 
@@ -86,6 +93,12 @@ class ReciteJuzActivity : AppCompatActivity() {
         }
         txtCount.text = "$c"
         setUpRecyclerSurah(c)
+        txtCount.setOnClickListener {
+            txtCount.visibility = View.GONE
+            etCount.visibility = View.VISIBLE
+            etCount.setText(txtCount.text.toString())
+            editortext()
+        }
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +134,35 @@ class ReciteJuzActivity : AppCompatActivity() {
 
 
     ////////////////////////////////////////////////////////////////////////////
+    private fun editortext() {
 
+
+        etCount.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                val pg = v.text.toString().toInt()
+                if (pg < 1 || pg > 604) {
+                    etCount.error = "Please Enter between [1 and 604]"
+                    etCount.requestFocus()
+                } else {
+                    c = pg
+                    etCount.visibility = View.GONE
+                    txtCount.visibility = View.VISIBLE
+                    txtCount.text = v.text.toString()
+                    progressLayout.visibility = View.VISIBLE
+                    jpsList.clear()
+                    oList.clear()
+                    setUpRecyclerSurah(pg)
+
+                    (v.context.getSystemService(INPUT_METHOD_SERVICE)
+                            as InputMethodManager)
+                        .hideSoftInputFromWindow(v.windowToken, 0)
+
+                    return@OnEditorActionListener true
+                }
+            }
+            false
+        })
+    }
 
     private fun setUpToolbar(title: String) {
         setSupportActionBar(toolbar)

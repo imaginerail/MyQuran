@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +18,7 @@ class ShowSelectedEditionAdapter(val context: Context, var sList: ArrayList<SelE
 
     class SLViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtid: TextView = view.findViewById(R.id.txtid)
-        val llContent: RelativeLayout = view.findViewById(R.id.llContent)
+        val llContent: LinearLayout = view.findViewById(R.id.llContent)
 
     }
 
