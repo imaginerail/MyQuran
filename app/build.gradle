@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.aneeq.myquran"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.otaliastudios:autocomplete:1.1.0'
     implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
     implementation 'com.github.jeancsanchez:JcPlayer:2.7.0'
-    implementation 'com.github.mergehez:ArgPlayer:v2.1'
+    implementation 'com.github.mergehez:ArgPlayer:v3.1'
     implementation "com.github.skydoves:powerspinner:1.1.9"
 
 

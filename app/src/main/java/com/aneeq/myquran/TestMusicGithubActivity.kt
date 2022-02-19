@@ -3,12 +3,13 @@ package com.aneeq.myquran
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arges.sepan.argmusicplayer.Enums.AudioType
-import com.arges.sepan.argmusicplayer.IndependentClasses.ArgAudio
-import com.arges.sepan.argmusicplayer.IndependentClasses.ArgAudioList
+import com.arges.sepan.argmusicplayer.Models.ArgAudio
+import com.arges.sepan.argmusicplayer.Models.ArgAudioList
 import com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
 import com.example.jean.jcplayer.model.JcAudio
 import com.example.jean.jcplayer.view.JcPlayerView
@@ -18,12 +19,14 @@ import com.skydoves.powerspinner.PowerSpinnerView
 
 
 class TestMusicGithubActivity : AppCompatActivity() {
+    lateinit var btn: Button
     private lateinit var jcplayer: JcPlayerView
     lateinit var argmusicplayer: ArgPlayerSmallView
     lateinit var psvLang: PowerSpinnerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_music_github)
+        btn = findViewById(R.id.btn)
         psvLang = findViewById(R.id.psvLang)
         jcplayer = findViewById(R.id.jcplayer)
         argmusicplayer = findViewById(R.id.argmusicplayer)
@@ -37,8 +40,11 @@ class TestMusicGithubActivity : AppCompatActivity() {
             "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ"
         )
         playJC(ayah)
-        playAM()
+
         setuppsvLang()
+        btn.setOnClickListener {
+            testArgPl()
+        }
 
     }
 
@@ -105,5 +111,25 @@ class TestMusicGithubActivity : AppCompatActivity() {
         }
     }
 
+    private fun testArgPl() {
+        val singleAudioList = ArrayList<ArgAudio>()
+
+        for (i in 1 until 8) {
+            singleAudioList.add(
+                ArgAudio(
+                    "",
+                    "",
+                    "https://everyayah.com/data/ahmed_ibn_ali_al_ajamy_128kbps/00100$i.mp3",
+                    AudioType.URL
+                )
+            )
+        }
+
+
+        val c: Collection<ArgAudio> = singleAudioList
+        val playlist = ArgAudioList(true).addAll(c)
+        Log.d("coll", c.toString())
+//        argmusicplayer.playPlaylist(playlist)
+    }
 
 }
