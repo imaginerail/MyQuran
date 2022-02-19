@@ -22,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
 import com.aneeq.myquran.adapter.audio.ReciteAudioAdapter
-import com.aneeq.myquran.models.AudioClass
+import com.aneeq.myquran.models.OriginalJuz
 import com.aneeq.myquran.util.ConnectionManager
 import com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,8 +38,10 @@ class ReciteAudioActivity : AppCompatActivity() {
     lateinit var argmusicplayer: ArgPlayerSmallView
     lateinit var fabplay: FloatingActionButton
     lateinit var txtwhois: TextView
-    val aList = arrayListOf<AudioClass>()
+    lateinit var rl2: RelativeLayout
 
+    val oList = arrayListOf<OriginalJuz>()
+    var orgjuzAyahs: OriginalJuz? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,22 +49,25 @@ class ReciteAudioActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("Messenger Preferences", Context.MODE_PRIVATE)
         recycleRecite = findViewById(R.id.recycleRecite)
         progressLayout = findViewById(R.id.progressLayout)
-        progressLayout.visibility = View.VISIBLE
+
         progressBar = findViewById(R.id.progressBar)
         toolbar = findViewById(R.id.toolbar)
         argmusicplayer = findViewById(R.id.argmusicplayer)
         fabplay = findViewById(R.id.fabplay)
         txtwhois = findViewById(R.id.txtwhois)
+        rl2 = findViewById(R.id.rl2)
 
+        rl2.visibility = View.VISIBLE
 
-        txtwhois.text = "You are listening to ${
+        val s = "You are listening to ${
             sharedPreferences.getString(
                 "imam",
                 "Abdul Basit Murattal"
             )
         }.\n To change the reciter, go to settings."
-
-        setUpRecyclerSurah()
+        txtwhois.text = s
+        setUpToolbar("Audio")
+        setUpRecycler()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,19 +95,13 @@ class ReciteAudioActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
     }
 
-    private fun setUpRecyclerSurah() {
-        recycleRecite = findViewById(R.id.recycleRecite)
 
+    private fun setUpRecycler() {
+        recycleRecite = findViewById(R.id.recycleRecite)
 
         val queue = Volley.newRequestQueue(this)
 
-        val url = "http://quran-endpoint.herokuapp.com/quran/${
-            intent.getIntExtra(
-                "num",
-                1
-            )
-        }?imamId=${sharedPreferences.getInt("audio", 1)}"
-
+        val url = "http://api.alquran.cloud/v1/surah/${intent.getIntExtra("num", 1)}/quran-simple"
 
         if (ConnectionManager().checkConnection(this)) {
 
@@ -113,44 +112,30 @@ class ReciteAudioActivity : AppCompatActivity() {
 
                     try {
                         val data = it.getJSONObject("data")
-                        val surahName =
-                            data.getJSONObject("asma").getJSONObject("ar").getString("long")
-                        val translation =
-                            data.getJSONObject("asma").getJSONObject("translation").getString("en")
-
-                        setUpToolbar("$surahName [$translation]")
                         val ayahs = data.getJSONArray("ayahs")
                         for (i in 0 until ayahs.length()) {
-                            val arabicText =
-                                ayahs.getJSONObject(i).getJSONObject("text").getString("ar")
-                            val audiourl =
-                                ayahs.getJSONObject(i).getJSONObject("audio").getString("url")
-                            val numberInSurah =
-                                ayahs.getJSONObject(i).getJSONObject("number").getInt("insurah")
-                            val read =
-                                ayahs.getJSONObject(i).getJSONObject("text").getString("read")
-                            val audioClass = AudioClass(
-                                intent.getIntExtra(
-                                    "num",
-                                    1
-                                ),
-                                audiourl,
-                                arabicText,
-                                read,
-                                numberInSurah
-                            )
-                            aList.add(audioClass)
-                        }
+                            val jsonObject = ayahs.getJSONObject(i)
 
+                            orgjuzAyahs = OriginalJuz(
+                                data.getInt("number"),
+                                jsonObject.getInt("numberInSurah"),
+                                jsonObject.getString("text"),
+                                0, 0
+                            )
+                            oList.add(orgjuzAyahs!!)
+                        }
                         reciteSurahAdapter =
-                            ReciteAudioAdapter(this, aList, argmusicplayer, fabplay)
-                        val mLayoutManager: LinearLayoutManager =
+                            ReciteAudioAdapter(
+                                this, oList,
+                                sharedPreferences.getString("audio", "Abdul_Basit_Murattal_64kbps")
+                                    .toString(), argmusicplayer, fabplay
+                            )
+                        val mLayoutManager =
                             LinearLayoutManager(this)
                         recycleRecite.layoutManager = mLayoutManager
                         recycleRecite.itemAnimator = DefaultItemAnimator()
                         recycleRecite.adapter = reciteSurahAdapter
                         recycleRecite.setHasFixedSize(true)
-
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -165,6 +150,7 @@ class ReciteAudioActivity : AppCompatActivity() {
                         .show()
                 }) {}
             queue.add(jsonObjectRequest1)
+
         } else openInternetDialog()
     }
 
@@ -199,7 +185,7 @@ class ReciteAudioActivity : AppCompatActivity() {
         dialog.setMessage(msg)
         dialog.setPositiveButton("Change Reciter")
         { _, _ ->
-            sharedPreferences.edit().putInt("audio", 0).apply()
+            sharedPreferences.edit().putString("audio", "").apply()
             startActivity(Intent(this, AudioDisplayActivity::class.java))
         }
         dialog.setNegativeButton("Cancel")

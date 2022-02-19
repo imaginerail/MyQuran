@@ -19,7 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
 import com.aneeq.myquran.adapter.audio.AudioDisplayAdapter
-import com.aneeq.myquran.models.JuzList
+import com.aneeq.myquran.models.Reciters
 import com.aneeq.myquran.util.ConnectionManager
 import org.json.JSONException
 
@@ -29,7 +29,7 @@ class AudioDisplayActivity : AppCompatActivity() {
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
     lateinit var audioDisplayAdapter: AudioDisplayAdapter
-    val adList = ArrayList<JuzList>()
+    val adList = ArrayList<Reciters>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_display)
@@ -45,7 +45,7 @@ class AudioDisplayActivity : AppCompatActivity() {
 
     private fun setUpRecycler() {
         val queue = Volley.newRequestQueue(this)
-        val url = "http://quran-endpoint.herokuapp.com/imam"
+        val url = "https://everyayah.com/data/recitations.js"
 
         if (ConnectionManager().checkConnection(this)) {
 
@@ -56,15 +56,18 @@ class AudioDisplayActivity : AppCompatActivity() {
                     progressLayout.visibility = View.GONE
 
                     try {
-                        val data = it.getJSONArray("data")
-                        for (i in 0 until data.length()) {
-
-                            val ad = JuzList(
-                                "",
-                                data.getJSONObject(i).getString("name"),
-                                data.getJSONObject(i).getInt("id")
-                            )
-                            adList.add(ad)
+                        for (i in 1..79) {
+                            val numers = it.getJSONObject("$i")
+                            if (!numers.getString("subfolder")
+                                    .contains("/")
+                            ) {
+                                val ad = Reciters(
+                                    numers.getString("subfolder"),
+                                    numers.getString("name"),
+                                    numers.getString("bitrate")
+                                )
+                                adList.add(ad)
+                            }
                         }
 
 

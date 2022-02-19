@@ -14,10 +14,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
 import com.aneeq.myquran.activity.NavigActivity
-import com.aneeq.myquran.models.JuzList
+import com.aneeq.myquran.models.Reciters
 
 
-class AudioDisplayAdapter(val context: Context, var adList: ArrayList<JuzList>) :
+class AudioDisplayAdapter(val context: Context, var adList: ArrayList<Reciters>) :
     RecyclerView.Adapter<AudioDisplayAdapter.ADViewHolder>() {
     lateinit var sharedPreferences: SharedPreferences
 
@@ -25,7 +25,7 @@ class AudioDisplayAdapter(val context: Context, var adList: ArrayList<JuzList>) 
         val llContent: LinearLayout = view.findViewById(R.id.llContent)
         val txthname: TextView = view.findViewById(R.id.txthname)
         val imgsrc: ImageView = view.findViewById(R.id.imgsrc)
-
+        val txtbitrate: TextView = view.findViewById(R.id.txtbitrate)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ADViewHolder {
@@ -43,8 +43,9 @@ class AudioDisplayAdapter(val context: Context, var adList: ArrayList<JuzList>) 
             context.getSharedPreferences("Messenger Preferences", Context.MODE_PRIVATE)
         val sq = adList[position]
         holder.txthname.text = sq.name
+        holder.txtbitrate.text = sq.bitRate
         holder.llContent.setOnClickListener {
-            sharedPreferences.edit().putInt("audio", sq.page).apply()
+            sharedPreferences.edit().putString("audio", sq.apiName).apply()
             sharedPreferences.edit().putString("imam", sq.name).apply()
             Toast.makeText(
                 context,
