@@ -64,4 +64,13 @@
         android:layout_height="wrap_content"
         android:text="click me" />
 
+    <Button
+        android:id="@+id/btnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#F61515"
+        android:drawableStart="@drawable/ic_download"
+        android:text=" Download" />
+
 </LinearLayout>

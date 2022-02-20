@@ -1,9 +1,10 @@
 package com.aneeq.myquran.models
 
 data class AudioClass(
-    val number: Int,
-    val audio: String,
+    val surahNum: Int,
+    val ayahNum: Int,
     val text: String,
-    val read: String,
-    val numberInSurah: Int
+    val audioUrl: String
+
+
 )

@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
 import com.aneeq.myquran.adapter.audio.ReciteAudioAdapter
+import com.aneeq.myquran.models.AudioClass
 import com.aneeq.myquran.models.OriginalJuz
 import com.aneeq.myquran.util.ConnectionManager
 import com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
@@ -42,6 +43,11 @@ class ReciteAudioActivity : AppCompatActivity() {
 
     val oList = arrayListOf<OriginalJuz>()
     var orgjuzAyahs: OriginalJuz? = null
+    val aList = arrayListOf<AudioClass>()
+    var audioClass: AudioClass? = null
+    var surahref = ""
+    var ayahref = ""
+    var urlC = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,25 +116,48 @@ class ReciteAudioActivity : AppCompatActivity() {
 
                     progressLayout.visibility = View.GONE
 
+
                     try {
                         val data = it.getJSONObject("data")
                         val ayahs = data.getJSONArray("ayahs")
                         for (i in 0 until ayahs.length()) {
                             val jsonObject = ayahs.getJSONObject(i)
+                            val surahNum = data.getInt("number")
+                            val ayahNum = jsonObject.getInt("numberInSurah")
 
-                            orgjuzAyahs = OriginalJuz(
-                                data.getInt("number"),
-                                jsonObject.getInt("numberInSurah"),
+                            surahref = when {
+                                surahNum < 10 -> "00${surahNum}"
+                                surahNum in 10..99 -> "0${surahNum}"
+                                else -> "$surahNum"
+                            }
+
+                            ayahref = when {
+                                ayahNum < 10 -> "00${ayahNum}"
+                                ayahNum in 10..99 -> "0${ayahNum}"
+                                else -> "$ayahNum"
+                            }
+                            urlC = "https://everyayah.com/data/" +
+                                    "${
+                                        sharedPreferences.getString(
+                                            "audio",
+                                            "Abdul_Basit_Murattal_64kbps"
+                                        )
+                                            .toString()
+                                    }/" +
+                                    "$surahref$ayahref.mp3"
+
+                            audioClass = AudioClass(
+                                surahNum,
+                                ayahNum,
                                 jsonObject.getString("text"),
-                                0, 0
+                                urlC
                             )
-                            oList.add(orgjuzAyahs!!)
+                            aList.add(audioClass!!)
                         }
                         reciteSurahAdapter =
                             ReciteAudioAdapter(
-                                this, oList,
-                                sharedPreferences.getString("audio", "Abdul_Basit_Murattal_64kbps")
-                                    .toString(), argmusicplayer, fabplay
+                                this, aList,
+                                argmusicplayer, fabplay
                             )
                         val mLayoutManager =
                             LinearLayoutManager(this)
@@ -195,5 +224,9 @@ class ReciteAudioActivity : AppCompatActivity() {
 
         dialog.create()
         dialog.show()
+    }
+
+    private fun playPlaylist() {
+
     }
 }

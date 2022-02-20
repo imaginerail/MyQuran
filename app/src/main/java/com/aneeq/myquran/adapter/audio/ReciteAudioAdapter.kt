@@ -10,25 +10,22 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aneeq.myquran.R
-import com.aneeq.myquran.models.OriginalJuz
+import com.aneeq.myquran.models.AudioClass
 import com.arges.sepan.argmusicplayer.Enums.AudioType
 import com.arges.sepan.argmusicplayer.Models.ArgAudio
+import com.arges.sepan.argmusicplayer.Models.ArgAudioList
 import com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
-import com.example.jean.jcplayer.model.JcAudio
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ReciteAudioAdapter(
     val context: Context,
-    var slList: ArrayList<OriginalJuz>, private val apiName: String,
+    var slList: ArrayList<AudioClass>,
     var argmusicplayer: ArgPlayerSmallView,
     var fabplay: FloatingActionButton
 ) :
     RecyclerView.Adapter<ReciteAudioAdapter.SLViewHolder>() {
 
-    val jcAudios: ArrayList<JcAudio> = ArrayList()
     lateinit var sharedPreferences: SharedPreferences
-    var surahref = ""
-    var ayahref = ""
     var url = ""
 
     class SLViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -57,50 +54,29 @@ class ReciteAudioAdapter(
         val sq = slList[position]
         holder.txtquran.text = "${sq.surahNum}:${sq.ayahNum} ${sq.text} \u06DD"
         holder.ll1.setOnClickListener {
-
-
-            surahref = when {
-                sq.surahNum < 10 -> "00${sq.surahNum}"
-                sq.surahNum in 10..99 -> "0${sq.surahNum}"
-                else -> "${sq.surahNum}"
-            }
-
-            ayahref = when {
-                sq.ayahNum < 10 -> "00${sq.ayahNum}"
-                sq.ayahNum in 10..99 -> "0${sq.ayahNum}"
-                else -> "${sq.ayahNum}"
-            }
-            url = "https://everyayah.com/data/$apiName/$surahref$ayahref.mp3"
             argmusicplayer.play(
                 ArgAudio(
-                    apiName, "", url, AudioType.URL
+                    "", "", sq.audioUrl, AudioType.URL
                 )
             )
 
         }
 
-
-        argmusicplayer.loadSingleAudio(
-            ArgAudio(
-                apiName, "", url, AudioType.URL
-            )
-        )
-
-        // argmusicplayer.playLoadedSingleAudio()
         fabplay.setOnClickListener {
-//            val audios = ArrayList<ArgAudio>()
-//            for (i in 0..slList.size) {
-//                audios.add(
-//                    ArgAudio(
-//                        sharedPreferences.getString(
-//                            "imam",
-//                            "Abdul Basit Murattal"
-//                        ), "", slList[i].audio, AudioType.URL
-//                    )
-//                )
-//            }
-//            val playlist=audios[0].makePlaylist()
-////            argmusicplayer.playPlaylist(playlist)
+
+            val playlist = ArgAudioList(true)
+            for (i in 0 until slList.size) {
+                playlist.add(
+                    ArgAudio(
+                        "",
+                        "",
+                        slList[i].audioUrl,
+                        AudioType.URL
+                    )
+                )
+            }
+            argmusicplayer.playPlaylist(playlist)
+            argmusicplayer.continuePlaylistWhenError()
         }
 
     }
