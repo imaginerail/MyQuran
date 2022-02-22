@@ -2,11 +2,11 @@ package com.aneeq.myquran
 
 
 import android.app.Dialog
-import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,16 +19,13 @@ import com.example.jean.jcplayer.view.JcPlayerView
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.skydoves.powerspinner.PowerSpinnerView
-import java.io.BufferedInputStream
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
-import java.net.URL
-import java.net.URLConnection
+import com.tonyodev.fetch2.*
+import com.tonyodev.fetch2core.DownloadBlock
 
 
 class TestMusicGithubActivity : AppCompatActivity() {
     lateinit var mProgressDialog: Dialog
+    lateinit var txtresult: TextView
     lateinit var btn: Button
     lateinit var btnd: Button
     private lateinit var jcplayer: JcPlayerView
@@ -38,10 +35,12 @@ class TestMusicGithubActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_music_github)
         btn = findViewById(R.id.btn)
+        txtresult = findViewById(R.id.txtresult)
         btnd = findViewById(R.id.btnd)
         psvLang = findViewById(R.id.psvLang)
         jcplayer = findViewById(R.id.jcplayer)
         argmusicplayer = findViewById(R.id.argmusicplayer)
+
         val ayah = arrayListOf(
             "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
             "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِين",
@@ -56,17 +55,149 @@ class TestMusicGithubActivity : AppCompatActivity() {
         setuppsvLang()
 
         btn.setOnClickListener {
-            testArgPl()
+
+            checkPermissions()
+            downloadFetch()
 
         }
         btnd.setOnClickListener {
-            val urlString =
-                "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3"
-//            DownloadAudioFromUrl(this).execute(urlString)
+
         }
 
     }
 
+    private fun checkPermissions() {
+        var isAvailable = false
+        var isWritable = false
+        var isReadable = false
+        val state = Environment.getExternalStorageState()
+
+        if (Environment.MEDIA_MOUNTED == state) {
+            // Operation possible - Read and Write
+            isAvailable = true
+            isWritable = true
+            isReadable = true
+        } else if (Environment.MEDIA_MOUNTED_READ_ONLY == state) {
+            // Operation possible - Read Only
+            isAvailable = true
+            isWritable = false
+            isReadable = true
+        } else {
+            // SD card not available
+            isAvailable = false
+            isWritable = false
+            isReadable = false
+        }
+
+
+    }
+
+    private fun downloadFetch() {
+        val fetchConfiguration = FetchConfiguration.Builder(this)
+            .setDownloadConcurrentLimit(3)
+            .build()
+
+        val fetch = Fetch.Impl.getInstance(fetchConfiguration)
+
+        val url = "https://everyayah.com/data/Abdul_Basit_Murattal_64kbps/001002.mp3"
+        val file = "/downloads/test001002.mp3"
+
+        val request = Request(url, file)
+        request.priority = Priority.HIGH
+        request.networkType = NetworkType.ALL
+        //request.addHeader("clientKey", "SD78DF93_3947&MVNGHE1WONG");
+
+        fetch.enqueue(request, { updatedRequest ->
+
+            Toast.makeText(
+                this,
+                "Request was successfully enqueued for download",
+                Toast.LENGTH_SHORT
+            ).show()
+        }, { error ->
+            Toast.makeText(
+                this,
+                "${error.name} An error occurred enqueuing the request.",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        })
+
+        val fetchListener = (object : FetchListener {
+            override fun onAdded(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCompleted(download: Download) {
+                Log.d("cdd", "${download.file}")
+                fetch.getDownloads {
+                    val s = "file: ${it[0].file}\n" +
+                            "namespace: ${it[0].namespace}"
+                    txtresult.text = s
+                }
+            }
+
+            override fun onDeleted(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDownloadBlockUpdated(
+                download: Download,
+                downloadBlock: DownloadBlock,
+                totalBlocks: Int
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(download: Download, error: Error, throwable: Throwable?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onPaused(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onProgress(
+                download: Download,
+                etaInMilliSeconds: Long,
+                downloadedBytesPerSecond: Long
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onQueued(download: Download, waitingOnNetwork: Boolean) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onRemoved(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResumed(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onStarted(
+                download: Download,
+                downloadBlocks: List<DownloadBlock>,
+                totalBlocks: Int
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onWaitingNetwork(download: Download) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        fetch.addListener(fetchListener)
+        fetch.close()
+    }
 
     private fun playJC(ayah: ArrayList<String>) {
         val jcAudios: ArrayList<JcAudio> = ArrayList()
@@ -122,82 +253,15 @@ class TestMusicGithubActivity : AppCompatActivity() {
                     )
             )
             setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, pos, item ->
-                Toast.makeText(applicationContext, " $pos ${item.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, " $pos ${item.text}", Toast.LENGTH_SHORT)
+                    .show()
             }
             getSpinnerRecyclerView().layoutManager = GridLayoutManager(baseContext, 2)
             // selectItemByIndex(4)
             preferenceName = "language"
         }
     }
-
-    private fun testArgPl() {
-        val playlist = ArgAudioList(true)
-        for (i in 1 until 8) {
-            playlist.add(
-                ArgAudio(
-                    "",
-                    "",
-                    "https://everyayah.com/data/Abdul_Basit_Murattal_64kbps/00100$i.mp3",
-                    AudioType.URL
-                )
-            )
-        }
-        argmusicplayer.playPlaylist(playlist)
-        argmusicplayer.continuePlaylistWhenError()
-
-    }
-
-//    override fun onCreateDialog(id: Int): Dialog {
-//        return when (id) {
-//            DIALOG_DOWNLOAD_PROGRESS -> {
-//                mProgressDialog = Dialog(this)
-//                mProgressDialog.setCancelMessage("Downloading file..")
-//                mProgressDialog.setCancelable(false)
-//                mProgressDialog.show()
-//                mProgressDialog
-//            }
-//            else -> null
-//        }
-//    }
 }
 
-class DownloadFileAsync(val context: Context) : AsyncTask<String?, String?, String?>() {
-//    override fun onPreExecute() {
-//        super.onPreExecute()
-////        showDialog(DIALOG_DOWNLOAD_PROGRESS)
-//    }
-//
-//    override fun onProgressUpdate(vararg values: String?) {
-//        Log.d("ANDRO_ASYNC", progress[0])
-//        mProgressDialog.setProgress(progress[0].toInt())
-//    }
-//
-//    override fun onPostExecute(unused: String?) {
-//        dismissDialog(DIALOG_DOWNLOAD_PROGRESS)
-//    }
 
-    override fun doInBackground(vararg aurl: String?): String? {
-        var count: Int
-        try {
-            val url = URL(aurl[0])
-            val conexion: URLConnection = url.openConnection()
-            conexion.connect()
-            val lenghtOfFile: Int = conexion.contentLength
-            Log.d("ANDRO_ASYNC", "Lenght of file: $lenghtOfFile")
-            val input: InputStream = BufferedInputStream(url.openStream())
-            val output: OutputStream = FileOutputStream("/sdcard/some_photo_from_gdansk_poland.jpg")
-            val data = ByteArray(1024)
-            var total: Long = 0
-            while (input.read(data).also { count = it } != -1) {
-                total += count.toLong()
-                publishProgress("" + (total * 100 / lenghtOfFile).toInt())
-                output.write(data, 0, count)
-            }
-            output.flush()
-            output.close()
-            input.close()
-        } catch (e: Exception) {
-        }
-        return null
-    }
-}
+

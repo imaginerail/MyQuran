@@ -13,8 +13,10 @@
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="#CDDC39"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -23,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="2dp"
-            android:layout_weight="2.5"
             android:padding="3dp"
             android:text="Alif Laam Meem"
             android:textColor="@color/design_default_color_on_secondary"

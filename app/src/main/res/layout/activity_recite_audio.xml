@@ -14,21 +14,57 @@
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways" />
 
-    <TextView
-        android:id="@+id/txtwhois"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/lolly"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:padding="5dp" />
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:weightSum="6">
+
+        <Button
+            android:id="@+id/btnDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/ic_download"
+            android:gravity="center"
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/txtwhois"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="text" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabplay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="#F1DA0E"
+            android:contentDescription="@string/fab_transformation_scrim_behavior"
+            android:padding="4dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_play" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/txtwhois"
+        android:layout_below="@id/lolly"
         android:layout_marginTop="3dp"
         android:background="#19591C" />
 
@@ -75,22 +111,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
             android:layout_above="@id/argmusicplayer"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="25dp"
-            android:backgroundTint="#F1DA0E"
-            android:contentDescription="@string/fab_transformation_scrim_behavior"
-            android:scaleType="center"
-            android:src="@drawable/ic_play" />
-
+            android:layout_marginTop="3dp"
+            android:background="#19591C" />
 
         <com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
             android:id="@+id/argmusicplayer"

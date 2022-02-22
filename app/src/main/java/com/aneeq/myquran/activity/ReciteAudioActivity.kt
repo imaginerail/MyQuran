@@ -1,17 +1,18 @@
 package com.aneeq.myquran.activity
 
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,11 +24,14 @@ import com.android.volley.toolbox.Volley
 import com.aneeq.myquran.R
 import com.aneeq.myquran.adapter.audio.ReciteAudioAdapter
 import com.aneeq.myquran.models.AudioClass
-import com.aneeq.myquran.models.OriginalJuz
 import com.aneeq.myquran.util.ConnectionManager
+import com.arges.sepan.argmusicplayer.Enums.AudioType
+import com.arges.sepan.argmusicplayer.Models.ArgAudio
+import com.arges.sepan.argmusicplayer.Models.ArgAudioList
 import com.arges.sepan.argmusicplayer.PlayerViews.ArgPlayerSmallView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONException
+
 
 class ReciteAudioActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -40,14 +44,14 @@ class ReciteAudioActivity : AppCompatActivity() {
     lateinit var fabplay: FloatingActionButton
     lateinit var txtwhois: TextView
     lateinit var rl2: RelativeLayout
+    lateinit var btnDown: Button
 
-    val oList = arrayListOf<OriginalJuz>()
-    var orgjuzAyahs: OriginalJuz? = null
     val aList = arrayListOf<AudioClass>()
     var audioClass: AudioClass? = null
     var surahref = ""
     var ayahref = ""
     var urlC = ""
+    var currentIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +59,7 @@ class ReciteAudioActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("Messenger Preferences", Context.MODE_PRIVATE)
         recycleRecite = findViewById(R.id.recycleRecite)
         progressLayout = findViewById(R.id.progressLayout)
-
+        btnDown = findViewById(R.id.btnDown)
         progressBar = findViewById(R.id.progressBar)
         toolbar = findViewById(R.id.toolbar)
         argmusicplayer = findViewById(R.id.argmusicplayer)
@@ -72,8 +76,34 @@ class ReciteAudioActivity : AppCompatActivity() {
             )
         }.\n To change the reciter, go to settings."
         txtwhois.text = s
-        setUpToolbar("Audio")
         setUpRecycler()
+
+//        fabplay.setOnClickListener {
+//            playPlaylist()
+//        }
+        btnDown.setOnClickListener {
+            downloadPlaylist()
+        }
+
+    }
+
+    private fun downloadPlaylist() {
+        val fileUri: Uri =
+            Uri.parse("https://everyayah.com/data/Abdul_Basit_Murattal_64kbps/001002.mp3")
+        val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val request = DownloadManager.Request(fileUri)
+
+        request.setTitle("Audio Download")
+        request.setDescription("Android Audio download using DownloadManager.")
+
+
+        //Set the local destination for the downloaded file to a path
+        //within the application's external files directory
+        request.setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOWNLOADS + "/",
+            "Abdul_Basit_Murattal_64kbps_001002.mp3"
+        )
+        downloadManager.enqueue(request)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -120,6 +150,8 @@ class ReciteAudioActivity : AppCompatActivity() {
                     try {
                         val data = it.getJSONObject("data")
                         val ayahs = data.getJSONArray("ayahs")
+
+                        setUpToolbar("${data.get("name")}[${data.get("englishNameTranslation")}]")
                         for (i in 0 until ayahs.length()) {
                             val jsonObject = ayahs.getJSONObject(i)
                             val surahNum = data.getInt("number")
@@ -150,14 +182,14 @@ class ReciteAudioActivity : AppCompatActivity() {
                                 surahNum,
                                 ayahNum,
                                 jsonObject.getString("text"),
-                                urlC
+                                urlC, false
                             )
                             aList.add(audioClass!!)
                         }
                         reciteSurahAdapter =
                             ReciteAudioAdapter(
                                 this, aList,
-                                argmusicplayer, fabplay
+                                argmusicplayer, fabplay, recycleRecite
                             )
                         val mLayoutManager =
                             LinearLayoutManager(this)
@@ -227,6 +259,33 @@ class ReciteAudioActivity : AppCompatActivity() {
     }
 
     private fun playPlaylist() {
+        val playlist = ArgAudioList(true)
+        for (i in 0 until aList.size) {
+            playlist.add(
+                ArgAudio(
+                    "",
+                    "",
+                    aList[i].audioUrl,
+                    AudioType.URL
+                )
+            )
+        }
+        argmusicplayer.playPlaylist(playlist)
 
+        argmusicplayer.setOnPlayingListener {
+            currentIndex = argmusicplayer.currentAudio.id
+            (recycleRecite.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                argmusicplayer.currentAudio.id,
+                0
+            )
+
+            Log.d("cp", "${argmusicplayer.currentAudio.id}")
+        }
+        argmusicplayer.setOnErrorListener { errorType, description ->
+
+            argmusicplayer.playPlaylistItem(currentIndex - 1)
+            argmusicplayer.loadPlaylist(playlist)
+            argmusicplayer.playLoadedPlaylist()
+        }
     }
 }

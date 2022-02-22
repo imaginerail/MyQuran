@@ -8,4 +8,6 @@
     <color name="white">#FFFFFF</color>
     <color name="juzColor">#9C27B0</color>
 
+    <color name="AudioOrg">#CDDC39</color>
+    <color name="AudioNp">#50F157</color>
 </resources>
